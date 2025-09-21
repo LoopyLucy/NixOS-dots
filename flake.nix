@@ -7,11 +7,15 @@
             url = "github:nix-community/home-manager/master";
             inputs.nixpkgs.follows = "nixpkgs";
         };
-        zen-browser.url = "github:0xc000022070/zen-browser-flake";
+        zen-browser = {
+            url = "github:0xc000022070/zen-browser-flake";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
     };
 
-    outputs = { self, nixpkgs, home-manager, zen-browser, ... }:
+    outputs = inputs@{ self, nixpkgs, home-manager, zen-browser, ... }:
         let
+            inherit (self) outputs;
             lib = nixpkgs.lib;
             system = "x86_64-linux";
             pkgs = nixpkgs.legacyPackages.${system};
@@ -19,12 +23,14 @@
             nixosConfigurations = {
                 erin-desktop = lib.nixosSystem {
                     inherit system;
+                    specialArgs = { inherit inputs outputs; };
                     modules = [ ./configuration.nix ];
                 };
             };
             homeConfigurations = {
                 erin = home-manager.lib.homeManagerConfiguration {
                     inherit pkgs;
+                    extraSpecialArgs = { inherit inputs outputs; };
                     modules = [ ./home.nix ];
                 };
             };
