@@ -14,6 +14,7 @@
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
+  boot.loader.timeout = 0;
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -55,7 +56,7 @@
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  #services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -114,14 +115,15 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    kitty
-    wget
+    #kitty
+    #wget
     #git
     bitwarden
     #nvim
   ];
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
