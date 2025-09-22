@@ -57,12 +57,14 @@
   programs.hyprland = {
     enable = true;
     withUWSM = true;
-    xwayand.enable = true;
+    xwayland.enable = true;
   };
 
   services.displayManager = {
+    autoLogin.enable = true;
+    autoLogin.user = "erin";
     sessionPackages = [
-      pkgs.hyprland#.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
+      pkgs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
     ];
     #plasma6.enable = false;
     sddm = {
@@ -112,9 +114,6 @@
       thunderbird
     ];
   };
-
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autologin.user = "erin";
 
   # Install firefox.
   programs.firefox.enable = true;
