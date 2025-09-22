@@ -1,13 +1,13 @@
 { pkgs, lib, ... }:
 
 {
-    catpuccin.waybar = {
-        enable = true;
-	mode = "createLink";
-    };
+    #catpuccin.waybar = {
+        #enable = true;
+	#mode = "createLink";
+    #};
 
     wayland.windowManager.hyprland.settings.exec-once = [
-	"waybar";
+	"waybar"
     ];
 
     programs.waybar = {
