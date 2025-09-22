@@ -54,7 +54,12 @@
   # You can disable this if you're only using the Wayland session.
   #services.xserver.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment.
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+    xwayand.enable = true;
+  };
+
   services.displayManager = {
     sessionPackages = [
       pkgs.hyprland#.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
