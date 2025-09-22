@@ -35,12 +35,15 @@
 
     # The home.packages option allows you to install Nix packages into your
     # environment.
+    fonts.fontconfig.enable = true;
     home.packages = with pkgs; [
-          inputs.zen-browser.packages."${system}".default
-          logiops
+        #Software
+        inputs.zen-browser.packages."${system}".default
+        logiops
+
+        #Fonts
+        meslo-lgs-nf
     ];
-
-
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
     # plain files is through 'home.file'.
