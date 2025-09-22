@@ -57,7 +57,7 @@
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager = {
     sessionPackages = [
-      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
+      pkgs.hyprland#.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
     ];
     #plasma6.enable = false;
     sddm = {
