@@ -63,6 +63,8 @@
   programs.vscode.enable = true;
   programs.bash.enable = true;
   programs.kitty.enable = true;
+  programs.neovim.enable = true;
+  programs.vesktop.enable = true;
 
   programs.git = {
     enable = true;
