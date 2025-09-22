@@ -19,14 +19,14 @@
 
             monitor = [",preferred,auto,1.0"];
 
-	    input = {
-		kb_layout = "gb";
-		numlock_by_default = true;
-	    };
+            input = {
+                kb_layout = "gb";
+                numlock_by_default = true;
+            };
 
             general = {
                 border_size = 0;
-                gaps_in = 2;
+                gaps_in = 4;
                 gaps_out = 4;
             };
 
@@ -63,7 +63,7 @@
             bind = [
                 "$mainMod, Q, killactive,"
 
-		"$mainMod, F, exec, dolphin"
+		        "$mainMod, F, exec, dolphin"
                 "$mainMod, B, exec, zen"
                 "$mainMod, T, exec, kitty"
                 "$mainMod, K, exec, konsole"

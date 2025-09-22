@@ -31,7 +31,7 @@
                 erin = home-manager.lib.homeManagerConfiguration {
                     inherit pkgs;
                     extraSpecialArgs = { inherit inputs outputs; };
-                    modules = [ ./home.nix ];
+                    modules = [ ./home/home.nix ];
                 };
             };
         };
