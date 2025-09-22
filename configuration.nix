@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, inputs, pkgs, ... }:
 
 {
   imports =
@@ -52,11 +52,19 @@
 
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
+  #services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = false;
+  services.displayManager = {
+    sessionPackages = [
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
+    ];
+    #plasma6.enable = false;
+    sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {

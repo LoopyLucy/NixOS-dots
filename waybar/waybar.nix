@@ -48,10 +48,14 @@
                     show-special = false;
                     on-scroll-up = "hyprctl dispatch workspace e-1";
                     on-scroll-down = "hyprctl dispatch workspace e+1";
-                    persistent-workspaces = [ "*:1" ];
-                    format = "{icon} {windows}";
+                    persistent-workspaces = { "*" = 1; };
+                    format = "{windows} ";
+                    format-icons = {
+                        active = " :";
+                        default = " :";
+                    };
                     format-window-separator = " ";
-                    window-rewrite-default = "o";
+                    window-rewrite-default = "";
                     window-rewrite = {
                         "class<kitty|konsole>" = "";
 
@@ -59,7 +63,7 @@
 
                         "class<code|VSCode|code-url-handler|code-oss|codium|codium-url-handler|VSCodium>" = "";
 
-                        "class<[Tt]hunderbird|[Tt]hunderbird-esr>" = "";
+                        "class<[Tt]hunderbird|[Tt]hunderbird-esr>" = "";
 
                         "class<[Dd]iscord|[Ww]ebcord|Vesktop>" = "";
                     };
