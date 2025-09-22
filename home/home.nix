@@ -66,11 +66,22 @@
     #  /etc/profiles/per-user/erin/etc/profile.d/hm-session-vars.sh
     #
 
-    programs.vscode.enable = true;
+    #programs.vscode.enable = true;
     programs.bash.enable = true;
     programs.kitty.enable = true;
     programs.neovim.enable = true;
     programs.vesktop.enable = true;
+
+    programs.vscode = {
+        enable = true;
+        profiles.default.userSettings = {
+            "editor.fontFamily" = "JetBrainsMono Nerd Font";
+            "editor.fontLigatures" = true;
+            "terminal.integrated.fontLigatures.enabled" = true;
+            "git.confirmSync" = false;
+            "git.enableSmartCommit" = true;
+        };
+    };
 
     programs.git = {
         enable = true;
