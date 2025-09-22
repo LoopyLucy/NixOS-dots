@@ -2,8 +2,8 @@
 
 {
     imports = [
-	../rofi/rofi.nix
-	../waybar/waybar.nix
+	    ../rofi/rofi.nix
+	    ../waybar/waybar.nix
     ];
 
     home.packages = with pkgs; [
