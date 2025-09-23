@@ -54,11 +54,11 @@
   # You can disable this if you're only using the Wayland session.
   #services.xserver.enable = true;
 
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true;
-    xwayland.enable = true;
-  };
+  #programs.hyprland = {
+  #  enable = true;
+  #  withUWSM = true;
+  #  xwayland.enable = true;
+  #};
 
   services.displayManager = {
     autoLogin.enable = true;
