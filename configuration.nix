@@ -66,7 +66,7 @@
     sessionPackages = [
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
     ];
-    #plasma6.enable = false;
+    #plasma6.enable = true;
     sddm = {
       enable = true;
       wayland.enable = true;
