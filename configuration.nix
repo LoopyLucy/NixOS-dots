@@ -1,4 +1,4 @@
-# Edit this configuration file to define what should be installed on
+ # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
@@ -59,20 +59,19 @@
   #  withUWSM = true;
   #  xwayland.enable = true;
   #};
+  services.desktopManager.plasma6.enable = true;
 
   services.displayManager = {
     autoLogin.enable = true;
     autoLogin.user = "erin";
-    sessionPackages = [
-      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
-    ];
+    sessionPackages = [ inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland ];
+    defaultSession = "hyprland";
     sddm = {
       enable = true;
       wayland.enable = true;
     };
   };
 
-  services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
