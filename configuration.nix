@@ -66,12 +66,13 @@
     sessionPackages = [
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
     ];
-    #plasma6.enable = true;
     sddm = {
       enable = true;
       wayland.enable = true;
     };
   };
+
+  services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
