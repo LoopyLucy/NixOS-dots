@@ -67,10 +67,21 @@
     #
 
     #programs.vscode.enable = true;
-    programs.bash.enable = true;
     programs.kitty.enable = true;
     programs.neovim.enable = true;
     programs.vesktop.enable = true;
+    
+    programs.bash = {
+        enable = true;
+        shellAliases = {
+            ll = "ls -l";
+            ".." = "cd ..";
+            la = "ls -a";
+
+            buildhome = "home-manager switch --flake ~/.nixos";
+            buildnix = "sudo nixos-rebuild switch --flake ~/.nixos";
+        };
+    };
 
     programs.vscode = {
         enable = true;
