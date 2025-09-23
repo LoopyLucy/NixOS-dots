@@ -14,12 +14,18 @@
 
     wayland.windowManager.hyprland = {
         enable = true;
+        xwayland.enable = true;
+
+        package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+        portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
         systemd.variables = ["--all"];
 
         settings = {
 
             monitor = [",preferred,auto,1.0"];
+
+            xwayland.force_zero_scaling = true;
 
             input = {
                 kb_layout = "gb";
@@ -57,7 +63,6 @@
                     popups = true;
                 };
 
-		#xwayland.force_zero_scaling = true;
             };
 
             "$mainMod" = "SUPER";
