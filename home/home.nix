@@ -40,6 +40,7 @@
         #Software
         inputs.zen-browser.packages."${system}".default
         logiops
+        bottles
 
         #Fonts
         meslo-lgs-nf
