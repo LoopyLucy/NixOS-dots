@@ -3,6 +3,7 @@
 {
     imports = [
         ./startup-apps.nix
+        ./input.nix
 	    ../rofi/rofi.nix
 	    ../waybar/waybar.nix
     ];
@@ -11,6 +12,7 @@
         hyprpicker
         networkmanagerapplet
         grimblast
+        wl-clipboard
     ];
 
     wayland.windowManager.hyprland = {
@@ -27,13 +29,6 @@
             monitor = [",preferred,auto,1.0"];
 
             xwayland.force_zero_scaling = true;
-
-            input = {
-                kb_layout = "gb";
-                numlock_by_default = true;
-
-                kb_options = caps:super;
-            };
 
             general = {
                 border_size = 0;
@@ -67,48 +62,6 @@
                 };
 
             };
-
-            "$mainMod" = "SUPER";
-
-            bindm = [
-                "$mainMod, mouse:272, movewindow" # NOTE: mouse:272 = left click
-                "$mainMod, mouse:273, resizewindow" # NOTE: mouse:273 = right click
-            ];
-
-            bind = [
-                "CTRL ALT, Delete, exec, hyprctl dispatch exit 0"
-                
-                # Window Control
-                "$mainMod, Q, killactive,"
-                "$mainMod SHIFT, F, fullscreen, 1"
-                "$mainMod, SPACE, togglefloating"
-
-		        "$mainMod, F, exec, dolphin"
-                "$mainMod, B, exec, zen"
-                "$mainMod, T, exec, kitty"
-                "$mainMod, K, exec, konsole"
-                ", Print, exec, grimblast copy area"
-
-                # Workspaces
-                "$mainMod, right, workspace, m+1"
-                "$mainMod, left, workspace, m-1"
-                "$mainMod, mouse_down, workspace, e-1"
-                "$mainMod, mouse_up, workspace, e+1"
-                "$mainMod, mouse_right, workspace, e-1"
-                "$mainMod, mouse_left, workspace, e+1"
-            ]
-            ++ (
-                # workspaces
-                # binds $mainMod + [shift +] {1..9} to [move to] workspace {1..9}
-                builtins.concatLists (builtins.genList (i:
-                    let ws = i + 1;
-                    in [
-                        "$mainMod, code:1${toString i}, workspace, ${toString ws}"
-                        "$mainMod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
-                    ]
-                )9)
-
-            );
 
         };
 
