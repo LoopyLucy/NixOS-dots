@@ -1,4 +1,4 @@
-{ config, inputs, pkgs, ... }:
+{ config, services, inputs, pkgs, ... }:
 
 {
 
@@ -39,8 +39,13 @@
     home.packages = with pkgs; [
         #Software
         inputs.zen-browser.packages."${system}".default
+        bitwarden
         logiops
         bottles
+
+        #Tools
+        wev
+        piper
 
         #Fonts
         meslo-lgs-nf
