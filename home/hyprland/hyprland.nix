@@ -31,6 +31,8 @@
             input = {
                 kb_layout = "gb";
                 numlock_by_default = true;
+
+                kb_options = caps:super;
             };
 
             general = {
@@ -78,6 +80,8 @@
                 
                 # Window Control
                 "$mainMod, Q, killactive,"
+                "$mainMod SHIFT, F, fullscreen, 1"
+                "$mainMod, SPACE, togglefloating"
 
 		        "$mainMod, F, exec, dolphin"
                 "$mainMod, B, exec, zen"
@@ -90,6 +94,8 @@
                 "$mainMod, left, workspace, m-1"
                 "$mainMod, mouse_down, workspace, e-1"
                 "$mainMod, mouse_up, workspace, e+1"
+                "$mainMod, mouse_right, workspace, e-1"
+                "$mainMod, mouse_left, workspace, e+1"
             ]
             ++ (
                 # workspaces
