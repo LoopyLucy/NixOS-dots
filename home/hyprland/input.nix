@@ -13,42 +13,37 @@
 
             "$mainMod" = "SUPER";
 
-            bindm = [
-                "$mainMod, mouse:272, movewindow" # NOTE: mouse:272 = left click
-                "$mainMod, mouse:273, resizewindow" # NOTE: mouse:273 = right click
-            ];
-
             bind = [
                 #USER (Software)
-                "$mainMod, F, exec, dolphin"            
-                "$mainMod, B, exec, zen"
-                "$mainMod, T, exec, kitty"
-                "$mainMod, K, exec, konsole"
-                ",         Print, exec, grimblast copy area"
+                "$mainMod, F,                exec, dolphin"            
+                "$mainMod, B,                exec, zen"
+                "$mainMod, T,                exec, kitty"
+                "$mainMod, K,                exec, konsole"
+                ",         Print,            exec, grimblast copy area"
                 
                 #System
-                "CTRL ALT, Delete, exec, hyprctl dispatch exit 0"
+                "CTRL ALT, Delete,           exec, hyprctl dispatch exit 0"
                 
                 # Window Control
-                "$mainMod,       Q, killactive,"
-                "$mainMod SHIFT, F, fullscreen, 1"
-                "$mainMod SHIFT, SPACE, togglefloating"
-                "$mainMod SHIFT, D, movetoworkspace, +1"
-                "$mainMod SHIFT, A, movetoworkspace, -1"
-                "$mainMod SHIFT, left, movetoworkspace, +1"
-                "$mainMod SHIFT, right, movetoworkspace, -1"
-                "$mainMod SHIFT, mouse_up, movetoworkspace, +1"
+                "$mainMod,       Q,          killactive,"
+                "$mainMod SHIFT, F,          fullscreen, 1"
+                "$mainMod SHIFT, SPACE,      togglefloating"
+                "$mainMod SHIFT, D,          movetoworkspace, +1"
+                "$mainMod SHIFT, A,          movetoworkspace, -1"
+                "$mainMod SHIFT, left,       movetoworkspace, +1"
+                "$mainMod SHIFT, right,      movetoworkspace, -1"
+                "$mainMod SHIFT, mouse_up,   movetoworkspace, +1"
                 "$mainMod SHIFT, mouse_down, movetoworkspace, -1"
                 
                 # Workspaces
-                "$mainMod, right, workspace, +1"
-                "$mainMod, left, workspace, -1"
-                "$mainMod, D, workspace, +1"
-                "$mainMod, A, workspace, -1"
-                "$mainMod, mouse_up, workspace, +1"
-                "$mainMod, mouse_down, workspace, -1"
-                "$mainMod, mouse_left, workspace, +1"
-                "$mainMod, mouse_right, workspace, -1"
+                "$mainMod, right,            workspace, +1"
+                "$mainMod, left,             workspace, -1"
+                "$mainMod, D,                workspace, +1"
+                "$mainMod, A,                workspace, -1"
+                "$mainMod, mouse_up,         workspace, +1"
+                "$mainMod, mouse_down,       workspace, -1"
+                "$mainMod, mouse_left,       workspace, +1"
+                "$mainMod, mouse_right,      workspace, -1"
             ]
             ++ (
                 # workspaces
@@ -61,7 +56,25 @@
                     ]
                 )9)
 
-            );   
+            );
+
+            bindm = [
+                "$mainMod, mouse:272, movewindow" # NOTE: mouse:272 = left click
+                "$mainMod, mouse:273, resizewindow" # NOTE: mouse:273 = right click
+            ];
+
+            bindel = [
+                ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
+                ",XF86AudioLowerVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-"
+                ",       XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+            ];
+
+            bindl = [
+                ", XF86AudioPlay, exec, playerctl play-pause"
+                ",XF86AudioPause, exec, playerctl play-pause"
+                ", XF86AudioNext, exec, playerctl next"
+                ", XF86AudioPrev, exec, playerctl previous"
+            ];
         };
     };
 }
