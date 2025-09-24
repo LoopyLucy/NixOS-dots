@@ -6,8 +6,6 @@
 	#mode = "createLink";
     #};
 
-    wayland.windowManager.hyprland.settings.exec-once = [ "waybar" "nm-applet"];
-
     programs.waybar = {
         enable = true;
         style = ./style.css;

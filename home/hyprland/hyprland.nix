@@ -2,6 +2,7 @@
 
 {
     imports = [
+        ./startup-apps.nix
 	    ../rofi/rofi.nix
 	    ../waybar/waybar.nix
     ];
@@ -67,7 +68,15 @@
 
             "$mainMod" = "SUPER";
 
+            bindm = [
+                "$mainMod, mouse:272, movewindow" # NOTE: mouse:272 = left click
+                "$mainMod, mouse:273, resizewindow" # NOTE: mouse:273 = right click
+            ];
+
             bind = [
+                "CTRL ALT, Delete, exec, hyprctl dispatch exit 0"
+                
+                # Window Control
                 "$mainMod, Q, killactive,"
 
 		        "$mainMod, F, exec, dolphin"
@@ -76,7 +85,11 @@
                 "$mainMod, K, exec, konsole"
                 ", Print, exec, grimblast copy area"
 
-                "CTRL ALT, Delete, exec, hyprctl dispatch exit 0"
+                # Workspaces
+                "$mainMod, right, workspace, m+1"
+                "$mainMod, left, workspace, m-1"
+                "$mainMod, mouse_down, workspace, e-1"
+                "$mainMod, mouse_up, workspace, e+1"
             ]
             ++ (
                 # workspaces
