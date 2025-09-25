@@ -11,11 +11,8 @@
     ];
 
   # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
-  boot.loader.grub.configurationLimit = 20;
-  boot.loader.timeout = 3;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -31,7 +28,7 @@
   networking.networkmanager.enable = true;
 
   #enable vmware
-  virtualisation.vmware.guest.enable = true;
+  #virtualisation.vmware.guest.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/London";
