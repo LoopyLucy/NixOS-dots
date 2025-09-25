@@ -65,6 +65,7 @@
     ];
 
     #programs.vscode.enable = true;
+    programs.fastfetch.enable = true;
     programs.kitty.enable = true;
     programs.neovim.enable = true;
     programs.vesktop.enable = true;
@@ -75,6 +76,7 @@
             ll = "ls -l";
             ".." = "cd ..";
             la = "ls -a";
+            ff = "fastfetch";
 
             buildhome = "home-manager switch --flake ~/.nixos";
             buildnix = "sudo nixos-rebuild switch --flake ~/.nixos";
