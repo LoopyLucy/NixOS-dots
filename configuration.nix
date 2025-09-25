@@ -113,6 +113,7 @@
     packages = with pkgs; [
       kdePackages.kate
       thunderbird
+      (pkgs.callPackage ./packages/stremio-linux-shell.nix {})
     ];
   };
 
@@ -123,7 +124,12 @@
   programs.steam.enable = true;
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    permittedInsecurePackages = [
+      "qtwebengine-5.15.19"
+    ];
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
