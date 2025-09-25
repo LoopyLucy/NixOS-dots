@@ -113,7 +113,7 @@
     packages = with pkgs; [
       kdePackages.kate
       thunderbird
-      (pkgs.callPackage ./packages/stremio-linux-shell.nix {})
+      #(pkgs.callPackage ./packages/stremio-linux-shell.nix {})
     ];
   };
 
