@@ -6,6 +6,8 @@
 	#mode = "createLink";
     #};
 
+    services.swaync.enable = true;
+
     programs.waybar = {
         enable = true;
         style = ./style.css;
@@ -14,7 +16,7 @@
             main = {
                 layer = "top";
                 position = "top";
-                width = 1070;
+                width = 1070;st
                 margin-left = 200;
                 margin-right = 200;
                 margin-top = 8;
@@ -56,13 +58,9 @@
                     window-rewrite-default = "";
                     window-rewrite = {
                         "class<kitty|konsole>" = "";
-
                         "class<.*zen.*>" = "󰰷";
-
                         "class<code|VSCode|code-url-handler|code-oss|codium|codium-url-handler|VSCodium>" = "";
-
                         "class<[Tt]hunderbird|[Tt]hunderbird-esr>" = "";
-
                         "class<[Dd]iscord|[Ww]ebcord|Vesktop>" = "";
                     };
                 };
