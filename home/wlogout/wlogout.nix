@@ -4,7 +4,7 @@
     programs.wlogout = {
         enable = true;
 
-        style = "./style.css";
+        style = ./style.css;
 
         layout = [
             { label = "lock"; action = "systemctl poweroff"; text = "Lock"; keybind = "l"; }
