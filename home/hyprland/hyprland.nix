@@ -4,8 +4,9 @@
     imports = [
         ./startup-apps.nix
         ./input.nix
-	    ../rofi/rofi.nix
 	    ../waybar/waybar.nix
+	    ../rofi/rofi.nix
+        ../wlogout/wlogout.nix
     ];
 
     home.packages = with pkgs; [
