@@ -4,14 +4,20 @@ let
     inherit (config.lib.formats.rasi) mkLiteral;
 in {
 
-	#xdg.configFile."rofi/colours.rasi".source = ./;
+	xdg.configFile."rofi/colours.rasi".source = ./colours.rasi;
+	xdg.configFile."rofi/style.rasi".source = ./style.rasi;
 
     programs.rofi = {
     	enable = true;
 
-		theme = {
-			"@theme" = ./style.rasi;
+		configuration {
+			font = "JetBrainsMono Nerd Font SemiBold 13";
 		};
+		element-text {
+			font = "JetBrainsMono Nerd Font SemiBold 11";
+		};
+
+		theme = "~/.config/rofi/style.rasi";
     };
 
     wayland.windowManager.hyprland.settings = {
