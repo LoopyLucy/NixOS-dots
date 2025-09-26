@@ -7,8 +7,8 @@
             name = "Breeze-Dark";
             package = pkgs.kdePackages.breeze-gtk;
         };
-        gtk3.extraCss = (builtins.readFile ./colors.css);
-        gtk4.extraCss = (builtins.readFile ./colors.css);
+        gtk3.extraCss = (builtins.readFile ./colours.css);
+        gtk4.extraCss = (builtins.readFile ./colours.css);
     };
 
     qt = {
