@@ -5,6 +5,7 @@
     imports = [
 
         ./hyprland/hyprland.nix
+        ./theme/theme.nix
 
     ];
 
@@ -21,21 +22,6 @@
 
         stateVersion = "25.05";
     };
-
-    gtk = {
-        enable = true;
-        theme = {
-            name = "Breeze-Dark";
-            package = pkgs.kdePackages.breeze-gtk;
-        };
-    };
-
-    qt = {
-        enable = true;
-        platformTheme.name = "kvantum";
-        style.name = "kvantum";
-    };
-    #qt.enable = true;
 
     nixpkgs.config = {
         allowUnfree = true;
