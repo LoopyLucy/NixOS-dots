@@ -18,14 +18,23 @@
             url = "github:Duckonaut/split-monitor-workspaces";
             inputs.hyprland.follows = "hyprland"; # <- make sure this line is present for the plugin to work as intended
         };
+
+        nixos-xivlauncher-rb = {
+            url = "github:The1Penguin/nixos-xivlauncher-rb";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
         
         zen-browser = {
             url = "github:0xc000022070/zen-browser-flake";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+
+        nix-gaming.url = "github:fufexan/nix-gaming";
+
+        nix-citizen.url = "github:LovingMelody/nix-citizen";
     };
 
-    outputs = inputs@{ self, nixpkgs, home-manager, split-monitor-workspaces, zen-browser, ... }:
+    outputs = inputs@{ self, nixpkgs, home-manager, split-monitor-workspaces, zen-browser, nix-gaming, nix-citizen, nixos-xivlauncher-rb,... }:
         let
             inherit (self) outputs;
             lib = nixpkgs.lib;

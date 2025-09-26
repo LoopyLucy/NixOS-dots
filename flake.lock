@@ -559,6 +559,26 @@
         "type": "github"
       }
     },
+    "nixos-xivlauncher-rb": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1758885752,
+        "narHash": "sha256-jsLlB1qGUBJ6Ms71CPOU973moicQWwjVpKvj5jw1WfY=",
+        "owner": "The1Penguin",
+        "repo": "nixos-xivlauncher-rb",
+        "rev": "e1120d423fc9bceb2dde6f966183ec8d1f5ee40d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "The1Penguin",
+        "repo": "nixos-xivlauncher-rb",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1758198701,
@@ -682,6 +702,7 @@
         "hyprland-plugins": "hyprland-plugins",
         "nix-citizen": "nix-citizen",
         "nix-gaming": "nix-gaming_2",
+        "nixos-xivlauncher-rb": "nixos-xivlauncher-rb",
         "nixpkgs": "nixpkgs_4",
         "split-monitor-workspaces": "split-monitor-workspaces",
         "zen-browser": "zen-browser"
