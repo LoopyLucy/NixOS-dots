@@ -10,12 +10,7 @@ in {
     programs.rofi = {
     	enable = true;
 
-		configuration {
-			font = "JetBrainsMono Nerd Font SemiBold 13";
-		};
-		element-text {
-			font = "JetBrainsMono Nerd Font SemiBold 11";
-		};
+		font = "JetBrainsMono Nerd Font SemiBold 11";
 
 		theme = "~/.config/rofi/style.rasi";
     };

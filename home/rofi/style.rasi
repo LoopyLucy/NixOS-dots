@@ -15,10 +15,11 @@ configuration {
     hover-select:               true;
     me-select-entry:            "MouseSecondary";
     me-accept-entry:            "MousePrimary";
+    /* text-color: #ffffff; */
 }
 
 /* ---- Load wallust colors ---- */
-@theme "./colors-rofi.rasi"
+@theme "~/.config/rofi/colours.rasi"
 
 /*****----- Global Properties -----*****/
 * {
