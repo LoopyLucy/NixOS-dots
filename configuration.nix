@@ -8,6 +8,9 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      #inputs.nix-gaming.nixosModules.steamCompat
+      inputs.nix-gaming.nixosModules.platformOptimizations
+      inputs.nix-gaming.nixosModules.wine
     ];
 
   # Bootloader.
@@ -117,8 +120,20 @@
   # Install firefox.
   programs.firefox.enable = true;
 
+  programs.gamescope = {
+    enable = true;
+    capSysNice = true;
+  };
+
   # Install steam
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+    platformOptimizations.enable = true;
+    extraCompatPackages = with pkgs; [
+      proton-ge-bin
+    ];
+  };
 
   # Allow unfree packages
   nixpkgs.config = {
@@ -169,8 +184,20 @@
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
 
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+    substituters = [
+      "https://hyprland.cachix.org"
+      "https://nix-gaming.cachix.org"
+      "https://nix-citizen.cachix.org"
+    ];
+    trusted-substituters = [
+      "https://hyprland.cachix.org"
+      "https://nix-gaming.cachix.org"
+      "https://nix-citizen.cachix.org"
+    ];
+    trusted-public-keys = [
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+      "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
+      "nix-citizen.cachix.org-1:lPMkWc2X8XD4/7YPEEwXKKBg+SVbYTVrAaLA2wQTKCo="
+    ];
   };
 }
