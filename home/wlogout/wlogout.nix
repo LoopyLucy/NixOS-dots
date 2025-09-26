@@ -1,6 +1,9 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 {
+
+    xdg.configFile."wlogout/icons".source = ./icons;
+    
     programs.wlogout = {
         enable = true;
 

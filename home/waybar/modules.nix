@@ -28,7 +28,7 @@
 
         "custom/power" = {
             format = " ⏻ ";
-            on-click = "wlogout -b 4";
+            on-click = "wlogout -b 5";
             tooltip = true;
             tooltip-format = "Left Click = Logout Menu";
         };
