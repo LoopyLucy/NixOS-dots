@@ -14,6 +14,7 @@
         grimblast
         wl-clipboard
         hyprsome
+        wlogout
     ];
 
     wayland.windowManager.hyprland = {
