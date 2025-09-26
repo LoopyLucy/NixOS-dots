@@ -1,4 +1,4 @@
-{ inputs, pkgs, fetchurl, split-monitor-workspaces, lib, ... }:
+{ inputs, pkgs, fetchurl, lib, ... }:
 
 {
     imports = [
@@ -14,7 +14,7 @@
         grimblast
         wl-clipboard
         hyprsome
-        wlogout
+        pavucontrol
     ];
 
     wayland.windowManager.hyprland = {

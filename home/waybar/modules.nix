@@ -28,10 +28,9 @@
 
         "custom/power" = {
             format = " ⏻ ";
-            on-click = "$HOME/.config/hypr/scripts/Wlogout.sh";
-            on-click-right = "$HOME/.config/hypr/scripts/ChangeBlur.sh";
+            on-click = "wlogout";
             tooltip = true;
-            tooltip-format = "Left Click = Logout Menu\nRight Click = Change Blur";
+            tooltip-format = "Left Click = Logout Menu";
         };
 
         "custom/swaync" = {
@@ -70,7 +69,7 @@
             format-icons = [
                 "󰈸"
             ];
-            on-click-right = "$HOME/.config/hypr/scripts/WaybarScripts.sh --nvtop";
+            on-click-right = "../scripts/WaybarScripts.sh --nvtop";
         };
 
         "tray" = {
@@ -97,10 +96,10 @@
                 ];
             };
             scroll-step = 5.0;
-            on-click = "$HOME/.config/hypr/scripts/Volume.sh --toggle";
+            on-click = "../scripts/Volume.sh --toggle";
             on-click-right = "pavucontrol -t 3";
-            on-scroll-up = "$HOME/.config/hypr/scripts/Volume.sh --inc";
-            on-scroll-down = "$HOME/.config/hypr/scripts/Volume.sh --dec";
+            on-scroll-up = "../scripts/Volume.sh --inc";
+            on-scroll-down = "../scripts/Volume.sh --dec";
             tooltip-format = "{icon} {desc} | {volume}%";
             smooth-scrolling-threshold = 1;
         };
