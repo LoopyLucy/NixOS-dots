@@ -1,4 +1,4 @@
-{ inputs, pkgs, fetchurl, lib, ... }:
+{ inputs, pkgs, fetchurl, split-monitor-workspaces, lib, ... }:
 
 {
     imports = [
@@ -13,6 +13,7 @@
         networkmanagerapplet
         grimblast
         wl-clipboard
+        hyprsome
     ];
 
     wayland.windowManager.hyprland = {
@@ -23,6 +24,10 @@
         portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
         systemd.variables = ["--all"];
+
+        plugins = [
+            inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
+        ];
 
         settings = {
 

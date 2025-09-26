@@ -10,6 +10,14 @@
         };
         
         hyprland.url = "github:hyprwm/Hyprland";
+        hyprland-plugins = {
+            url = "github:hyprwm/hyprland-plugins";
+            inputs.hyprland.follows = "hyprland";
+        };
+        split-monitor-workspaces = {
+            url = "github:Duckonaut/split-monitor-workspaces";
+            inputs.hyprland.follows = "hyprland"; # <- make sure this line is present for the plugin to work as intended
+        };
         
         zen-browser = {
             url = "github:0xc000022070/zen-browser-flake";
@@ -17,7 +25,7 @@
         };
     };
 
-    outputs = inputs@{ self, nixpkgs, home-manager, zen-browser, ... }:
+    outputs = inputs@{ self, nixpkgs, home-manager, split-monitor-workspaces, zen-browser, ... }:
         let
             inherit (self) outputs;
             lib = nixpkgs.lib;

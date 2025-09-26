@@ -28,22 +28,22 @@
                 "$mainMod,       Q,          killactive,"
                 "$mainMod SHIFT, F,          fullscreen, 1"
                 "$mainMod SHIFT, SPACE,      togglefloating"
-                "$mainMod SHIFT, D,          movetoworkspace, +1"
-                "$mainMod SHIFT, A,          movetoworkspace, -1"
-                "$mainMod SHIFT, left,       movetoworkspace, +1"
-                "$mainMod SHIFT, right,      movetoworkspace, -1"
-                "$mainMod SHIFT, mouse_up,   movetoworkspace, +1"
-                "$mainMod SHIFT, mouse_down, movetoworkspace, -1"
+                "$mainMod SHIFT, D,          split-movetoworkspace, +1"
+                "$mainMod SHIFT, A,          split-movetoworkspace, -1"
+                "$mainMod SHIFT, left,       split-movetoworkspace, +1"
+                "$mainMod SHIFT, right,      split-movetoworkspace, -1"
+                "$mainMod SHIFT, mouse_up,   split-movetoworkspace, +1"
+                "$mainMod SHIFT, mouse_down, split-movetoworkspace, -1"
                 
                 # Workspaces
-                "$mainMod, right,            workspace, +1"
-                "$mainMod, left,             workspace, -1"
-                "$mainMod, D,                workspace, +1"
-                "$mainMod, A,                workspace, -1"
-                "$mainMod, mouse_up,         workspace, +1"
-                "$mainMod, mouse_down,       workspace, -1"
-                "$mainMod, mouse_left,       workspace, +1"
-                "$mainMod, mouse_right,      workspace, -1"
+                "$mainMod, right,            split-workspace, +1"
+                "$mainMod, left,             split-workspace, -1"
+                "$mainMod, D,                split-workspace, +1"
+                "$mainMod, A,                split-workspace, -1"
+                "$mainMod, mouse_up,         split-workspace, +1"
+                "$mainMod, mouse_down,       split-workspace, -1"
+                "$mainMod, mouse_left,       split-workspace, +1"
+                "$mainMod, mouse_right,      split-workspace, -1"
             ]
             ++ (
                 # workspaces
@@ -51,8 +51,8 @@
                 builtins.concatLists (builtins.genList (i:
                     let ws = i + 1;
                     in [
-                        "$mainMod, code:1${toString i}, workspace, ${toString ws}"
-                        "$mainMod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+                        "$mainMod, code:1${toString i}, split-workspace, ${toString ws}"
+                        "$mainMod SHIFT, code:1${toString i}, split-movetoworkspace, ${toString ws}"
                     ]
                 )9)
 

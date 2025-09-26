@@ -1,4 +1,4 @@
-{ config, services, inputs, pkgs, ... }:
+{ config, services, inputs, pkgs, split-monitor-workspaces, ... }:
 
 {
 
