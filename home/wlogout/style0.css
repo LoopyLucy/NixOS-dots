@@ -1,12 +1,11 @@
-/* ----------- 💫 https://github.com/JaKooLit 💫 -------- */
-/* wallust-wlogout */
-
-/* Importing wallust colors */
-@import '../../.config/waybar/wallust/colors-waybar.css';
+* {
+    background-image: none;
+    font-size: 24pt;
+}
 
 window {
     font-size: 24pt;
-    color: @foreground; /* text */
+    color: #FDF9FE; /* text */
     background-color: rgba(30, 30, 46, 0.8);
 }
 
@@ -31,7 +30,7 @@ button:focus {
 
 button:hover {
     background-color: transparent; 
-    color: @color13;
+    color: #F9EEFC;
     background-size: 50%;
     margin: 30px;
     border-radius: 80px;
