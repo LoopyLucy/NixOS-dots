@@ -15,7 +15,7 @@
 
             bind = [
                 #USER (Software)
-                "$mainMod, F,                exec, dolphin"            
+                "$mainMod, F,                exec, thunar"            
                 "$mainMod, B,                exec, zen"
                 "$mainMod, T,                exec, kitty"
                 "$mainMod, K,                exec, konsole"

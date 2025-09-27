@@ -73,6 +73,9 @@
     };
   };
 
+  environment.systemPackages = with pkgs; [
+    libratbag
+  ];
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -120,8 +123,18 @@
     ];
   };
 
-  # Install firefox.
-  programs.firefox.enable = true;
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-archive-plugin
+      thunar-volman
+      thunar-vcs-plugin
+      thunar-media-tags-plugin
+    ];
+  };
+  programs.xfconf.enable = true;
+  services.gvfs.enable = true;
+  services.tumbler.enable = true;
 
   programs.gamescope = {
     enable = true;
@@ -170,12 +183,6 @@
   nixpkgs.config = {
     allowUnfree = true;
   };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    libratbag
-  ];
 
   services.ratbagd.enable = true;
 
