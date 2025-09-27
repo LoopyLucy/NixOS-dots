@@ -40,6 +40,8 @@
         kdePackages.qtwebengine
         calibre
         obs-studio
+        discord
+        vencord
 
 
         #Games
@@ -65,7 +67,6 @@
         nerd-fonts.jetbrains-mono
     ];
 
-    #programs.vscode.enable = true;
     programs.nix-your-shell.enable = true;
     programs.fastfetch.enable = true;
     programs.kitty.enable = true;
