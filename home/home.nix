@@ -48,6 +48,9 @@
         wev
         piper
         dconf
+        unzip
+        p7zip
+        calibre
 
         #Fonts
         meslo-lgs-nf
@@ -82,6 +85,10 @@
             "git.confirmSync" = false;
             "git.enableSmartCommit" = true;
         };
+    };
+
+    programs.yazi = {
+        enable = true;
     };
 
     programs.git = {
