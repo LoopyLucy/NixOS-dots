@@ -25,9 +25,6 @@
 
     nixpkgs.config = {
         allowUnfree = true;
-        nixpkgs.config.permittedInsecurePackages = [
-            "qtwebengine"
-        ];
     };
 
     fonts.fontconfig.enable = true;
@@ -38,7 +35,6 @@
         logiops
         bottles
         kdePackages.qtwebengine
-        #stremio #(fluppered)
 
         #Games
         #inputs.nix-gaming.packages.${pkgs.system}.star-citizen
@@ -46,6 +42,7 @@
         #inputs.nix-citizen.packages.${system}.star-citizen-git
         inputs.nix-citizen.packages.${system}.star-citizen-umu
         xivlauncher
+        modrinth-app
 
         #Tools
         wev
