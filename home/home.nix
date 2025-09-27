@@ -38,6 +38,9 @@
         logiops
         bottles
         kdePackages.qtwebengine
+        calibre
+        obs-studio
+
 
         #Games
         #inputs.nix-gaming.packages.${pkgs.system}.star-citizen
@@ -53,7 +56,6 @@
         dconf
         unzip
         p7zip
-        calibre
 
         #Themeing
         zsh-powerlevel10k
