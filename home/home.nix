@@ -15,9 +15,12 @@
 
         file = {};
 
+        shell.enableZshIntegration = true;
+
         sessionVariables = {
             NIXOS_OZONE_WL = 1;
             NIXPKGS_ALLOW_UNFREE = 1;
+            SHELL = "zsh";
         };
 
         stateVersion = "25.05";
@@ -52,12 +55,16 @@
         p7zip
         calibre
 
+        #Themeing
+        zsh-powerlevel10k
+
         #Fonts
         meslo-lgs-nf
         nerd-fonts.jetbrains-mono
     ];
 
     #programs.vscode.enable = true;
+    programs.nix-your-shell.enable = true;
     programs.fastfetch.enable = true;
     programs.kitty.enable = true;
     programs.neovim.enable = true;
@@ -74,6 +81,22 @@
             buildhome = "home-manager switch --flake ~/.nixos";
             buildnix = "sudo nixos-rebuild switch --flake ~/.nixos";
         };
+    };
+
+    programs.zsh = {
+        enable = true;
+        plugins = [
+        {
+            name = "powerlevel10k-config";
+            src = ./p10k;
+            file = "p10k.zsh";
+        }
+        {
+            name = "zsh-powerlevel10k";
+            src = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/";
+            file = "powerlevel10k.zsh-theme";
+        }
+    ];
     };
 
     programs.vscode = {

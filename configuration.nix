@@ -138,6 +138,34 @@
     ];
   };
 
+  programs.zsh = {
+    enable = true;
+
+    enableCompletion = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+
+    ohMyZsh = {
+      enable = true;
+      plugins = ["git" "sudo"];
+      #theme = "./.p10k.zsh";
+    };
+
+    histSize = 10000;
+    #histIgnoreAllDups = true;
+    #histIgnorePatterns = ["rm *" "git clone *" "ls *"
+
+    shellAliases = {
+        ll = "ls -l";
+        ".." = "cd ..";
+        la = "ls -a";
+        ff = "fastfetch";
+
+        buildhome = "home-manager switch --flake ~/.nixos";
+        buildnix = "sudo nixos-rebuild switch --flake ~/.nixos";
+    };
+  };
+
   # Allow unfree packages
   nixpkgs.config = {
     allowUnfree = true;
