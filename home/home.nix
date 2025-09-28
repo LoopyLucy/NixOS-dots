@@ -69,10 +69,14 @@
 
     programs.nix-your-shell.enable = true;
     programs.fastfetch.enable = true;
-    programs.kitty.enable = true;
     programs.neovim.enable = true;
     programs.vesktop.enable = true;
     
+    programs.kitty = { 
+        enable = true;
+        shellIntegration.enableZshIntegration = true;
+    };
+
     programs.bash = {
         enable = true;
         shellAliases = {
