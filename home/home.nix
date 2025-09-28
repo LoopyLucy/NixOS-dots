@@ -75,6 +75,11 @@
     programs.kitty = { 
         enable = true;
         shellIntegration.enableZshIntegration = true;
+
+        settings = {
+            confirm_os_window_close = 0;
+            enable-audio-bell = 0;
+        };
     };
 
     programs.bash = {
@@ -93,17 +98,17 @@
     programs.zsh = {
         enable = true;
         plugins = [
-        {
-            name = "powerlevel10k-config";
-            src = ./p10k;
-            file = "p10k.zsh";
-        }
-        {
-            name = "zsh-powerlevel10k";
-            src = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/";
-            file = "powerlevel10k.zsh-theme";
-        }
-    ];
+            {
+                name = "powerlevel10k-config";
+                src = ./p10k;
+                file = "p10k.zsh";
+            }
+            {
+                name = "zsh-powerlevel10k";
+                src = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/";
+                file = "powerlevel10k.zsh-theme";
+            }
+        ];
     };
 
     programs.vscode = {
