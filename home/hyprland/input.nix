@@ -14,15 +14,16 @@
             "$mainMod" = "SUPER";
 
             bind = [
-                #USER (Software)
+                # USER (Software)
                 "$mainMod, F,                exec, thunar"            
                 "$mainMod, B,                exec, zen"
                 "$mainMod, T,                exec, kitty"
                 "$mainMod, K,                exec, konsole"
                 ",         Print,            exec, grimblast copy area"
                 
-                #System
+                # System
                 "CTRL ALT, Delete,           exec, hyprctl dispatch exit 0"
+                "$mainMod SHIFT, R,          exec, pkill waybar || waybar"
                 
                 # Window Control
                 "$mainMod,       Q,          killactive,"
