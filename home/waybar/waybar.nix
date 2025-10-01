@@ -11,6 +11,13 @@
 
     services.swaync.enable = true;
 
+    home.packages = with pkgs; [
+        networkmanagerapplet
+        blueman
+    ];
+
+    services.blueman-applet.enable = true;
+
     programs.waybar = {
         enable = true;
         style = ./style.css;

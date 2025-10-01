@@ -13,6 +13,8 @@
       inputs.nix-gaming.nixosModules.wine
     ];
 
+  hardware.bluetooth.enable = true;
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -61,6 +63,7 @@
     samba
     libratbag
     v4l-utils
+    blueman
   ];
 
   services.xserver.xkb = {
@@ -116,6 +119,8 @@
   };
 
   services.printing.enable = true;
+
+  services.blueman.enable = true;
 
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
