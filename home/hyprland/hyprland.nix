@@ -8,6 +8,7 @@
 	    ../rofi/rofi.nix
         ../wlogout/wlogout.nix
     ];
+    
 
     home.packages = with pkgs; [
         hyprpicker
