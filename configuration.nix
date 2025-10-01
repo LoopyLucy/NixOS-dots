@@ -2,22 +2,20 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, inputs, pkgs, ... }:
+{ config, lib, inputs, pkgs, ... }:
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
       ./hardware-configuration.nix
       #inputs.nix-gaming.nixosModules.steamCompat
       inputs.nix-gaming.nixosModules.platformOptimizations
       inputs.nix-gaming.nixosModules.wine
     ];
 
-  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
@@ -27,23 +25,10 @@
     '';
   security.polkit.enable = true;
 
-  networking.hostName = "erin-desktop"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
+  networking.hostName = "erin-desktop";
   networking.networkmanager.enable = true;
 
-  #enable vmware
-  #virtualisation.vmware.guest.enable = true;
-
-  # Set your time zone.
   time.timeZone = "Europe/London";
-
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
 
   i18n.extraLocaleSettings = {
@@ -58,15 +43,6 @@
     LC_TIME = "en_GB.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  # You can disable this if you're only using the Wayland session.
-  #services.xserver.enable = true;
-
-  #programs.hyprland = {
-  #  enable = true;
-  #  withUWSM = true;
-  #  xwayland.enable = true;
-  #};
   services.desktopManager.plasma6.enable = true;
 
   services.displayManager = {
@@ -81,23 +57,66 @@
   };
 
   environment.systemPackages = with pkgs; [
+    pkgs.cifs-utils
+    samba
     libratbag
     v4l-utils
   ];
 
-  # Configure keymap in X11
   services.xserver.xkb = {
     layout = "gb";
     variant = "";
   };
 
-  # Configure console keymap
   console.keyMap = "uk";
 
-  # Enable CUPS to print documents.
+  services.samba = {
+    enable = true;
+    openFirewall = true;
+    settings = {
+      global = {
+        "workgroup" = "WORKGROUP";
+        "server string" = "smbnix";
+        "netbios name" = "smbnix";
+        "security" = "user";
+        #"use sendfile" = "yes";
+        #"max protocol" = "smb2";
+        # note: localhost is the ipv6 localhost ::1
+        "hosts allow" = "192.168.0. 127.0.0.1 localhost";
+        "hosts deny" = "0.0.0.0/0";
+        "guest account" = "nobody";
+        "map to guest" = "bad user";
+      };
+      "public" = {
+        "path" = "/mnt/Shares/Public";
+        "browseable" = "yes";
+        "read only" = "no";
+        "guest ok" = "yes";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "username";
+        "force group" = "groupname";
+      };
+      "private" = {
+        "path" = "/mnt/Shares/Private";
+        "browseable" = "yes";
+        "read only" = "no";
+        "guest ok" = "no";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "username";
+        "force group" = "groupname";
+      };
+    };
+  };
+
+  services.samba-wsdd = {
+    enable = true;
+    openFirewall = true;
+  };
+
   services.printing.enable = true;
 
-  # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -105,21 +124,11 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
   };
 
   
   services.flatpak.enable = true;
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.erin = {
     isNormalUser = true;
     description = "Erin Lucy Fitton";
@@ -127,7 +136,6 @@
     packages = with pkgs; [
       kdePackages.kate
       thunderbird
-      #(pkgs.callPackage ./packages/stremio-linux-shell.nix {})
     ];
   };
 
@@ -141,7 +149,10 @@
     ];
   };
   programs.xfconf.enable = true;
-  services.gvfs.enable = true;
+  services.gvfs = {
+    enable = true;
+    package = lib.mkForce pkgs.gnome.gvfs;
+  };
   services.tumbler.enable = true;
 
   programs.gamescope = {
@@ -149,7 +160,6 @@
     capSysNice = true;
   };
 
-  # Install steam
   programs.steam = {
     enable = true;
     gamescopeSession.enable = true;
@@ -169,12 +179,9 @@
     ohMyZsh = {
       enable = true;
       plugins = ["git" "sudo"];
-      #theme = "./.p10k.zsh";
     };
 
     histSize = 10000;
-    #histIgnoreAllDups = true;
-    #histIgnorePatterns = ["rm *" "git clone *" "ls *"
 
     shellAliases = {
         ll = "ls -l";
@@ -187,7 +194,6 @@
     };
   };
 
-  # Allow unfree packages
   nixpkgs.config = {
     allowUnfree = true;
   };
@@ -196,25 +202,15 @@
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = true;
+  networking.firewall.allowPing = true;
+  networking.firewall.extraCommands = ''iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns'';
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

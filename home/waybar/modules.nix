@@ -23,6 +23,7 @@
                 "class<code|VSCode|code-url-handler|code-oss|codium|codium-url-handler|VSCodium>" = "";
                 "class<[Tt]hunderbird|[Tt]hunderbird-esr>" = "";
                 "class<[Dd]iscord|[Ww]ebcord|Vesktop>" = "";
+                "class<[Ss]team>" = "";
             };
         };
 
