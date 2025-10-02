@@ -64,6 +64,7 @@
     libratbag
     v4l-utils
     blueman
+    android-tools
   ];
 
   services.xserver.xkb = {
@@ -130,6 +131,10 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+
+  programs.adb.enable = true;
+  programs.alvr.enable = true; 
+  programs.alvr.openFirewall = true;
 
   
   services.flatpak.enable = true;
