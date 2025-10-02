@@ -4,6 +4,7 @@
     imports = [
         ./startup-apps.nix
         ./input.nix
+        ./hyprpaper.nix
 	    ../waybar/waybar.nix
 	    ../rofi/rofi.nix
         ../wlogout/wlogout.nix
