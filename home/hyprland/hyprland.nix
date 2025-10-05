@@ -10,6 +10,7 @@
         ../wlogout/wlogout.nix
     ];
 
+    xdg.configFile."hypr/scripts".source = ./scripts;
 
     home.packages = with pkgs; [
         hyprpicker
@@ -70,6 +71,10 @@
                 };
 
             };
+
+            #windowrule = [
+            #    
+            #];
 
         };
 

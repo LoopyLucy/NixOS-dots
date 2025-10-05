@@ -16,7 +16,7 @@
             bind = [
                 # USER (Software)
                 "$mainMod, F,                exec, thunar"            
-                "$mainMod, B,                exec, zen"
+                "$mainMod, B,                exec, zen-beta"
                 "$mainMod, T,                exec, kitty"
                 "$mainMod, K,                exec, konsole"
                 ",         Print,            exec, grimblast copy area"

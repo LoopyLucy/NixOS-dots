@@ -36,7 +36,7 @@
         inputs.zen-browser.packages."${system}".default
         bitwarden
         logiops
-        bottles
+        (bottles.override {removeWarningPopup = true;})
         kdePackages.qtwebengine
         calibre
         obs-studio
@@ -53,11 +53,15 @@
         modrinth-app
 
         #Tools
+        btop
         wev
         piper
         dconf
         unzip
         p7zip
+        winetricks
+        protontricks
+        #steamtinkerlaunch
 
         #Themeing
         zsh-powerlevel10k

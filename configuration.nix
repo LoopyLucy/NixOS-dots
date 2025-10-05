@@ -65,6 +65,8 @@
     v4l-utils
     blueman
     android-tools
+    libnotify
+    glib
   ];
 
   services.xserver.xkb = {
