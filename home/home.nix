@@ -61,6 +61,8 @@
         p7zip
         winetricks
         protontricks
+        xdg-desktop-portal-gtk
+        limo
         #steamtinkerlaunch
 
         #Themeing
