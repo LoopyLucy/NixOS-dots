@@ -4,7 +4,7 @@
     wayland.windowManager.hyprland.settings = {
         exec-once = [
             "systemctl --user start hyprpaper"
-            "bash ~/.config/hypr/scripts/RandBackground.sh"
+            "sleep 1; bash ~/.config/hypr/scripts/RandBackground.sh"
         ];
     };
 
