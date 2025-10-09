@@ -4,18 +4,8 @@
     wayland.windowManager.hyprland.settings = {
         exec-once = [
             "systemctl --user start hyprpaper"
+            "bash ~/.config/hypr/scripts/RandBackground.sh"
         ];
-    };
-
-    systemd.user.timers = {
-        random-background = {
-            
-            #timerConfig = {
-            #    OnCalendar = "*-*-* *:0/00:01";
-            #    Persistent = true;
-            #};
-            #serviceConfig.ExecStart = "${pkgs.bash}/bin/bash ~/.config/hypr/scripts/RandBackground.sh";
-        };
     };
 
     services.hyprpaper = {
