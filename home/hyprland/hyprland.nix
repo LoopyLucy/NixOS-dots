@@ -35,7 +35,11 @@
 
         settings = {
 
-            monitor = [",preferred,auto,1.0"];
+            monitor = [
+                "DP-1, preferred, auto, 1"
+                "DP-2, preferred, auto, 1"
+                "    , preferred, auto, 1"
+            ];
 
             xwayland.force_zero_scaling = true;
 
@@ -69,7 +73,13 @@
                     special = true;
                     popups = true;
                 };
+            };
 
+            misc = {
+                disable_hyprland_logo = true;
+                background_color = "rgb(000000)";
+                middle_click_paste = true; # required or electron will emulate it.
+                enable_anr_dialog = false;
             };
 
             #windowrule = [

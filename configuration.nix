@@ -67,6 +67,7 @@
     android-tools
     libnotify
     glib
+    usbutils
   ];
 
   services.xserver.xkb = {
@@ -121,7 +122,42 @@
     openFirewall = true;
   };
 
-  services.printing.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+    publish = {
+      enable = true;
+      userServices = true;
+    };
+  };
+  
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      cups-filters
+      cups-browsed
+      gutenprint
+    ];
+
+    listenAddresses = [ "*:631" ];
+    allowFrom = [ "all" ];
+    browsing = true;
+    defaultShared = true;
+    openFirewall = true;
+  };
+
+  #hardware.printers.ensurePrinters = [
+  #  {
+  #    name = "Dell_1250c";
+  #    location = "Home";
+  #    deviceUri = "usb://Dell/1250c%20Color%20Printer?serial=YNP023240";
+  #    model = "Dell-1250c.ppd.gz";
+  #    ppdOptions = {
+  #      PageSize = "A4";
+  #    };
+  #  }
+  #];
 
   services.blueman.enable = true;
 
