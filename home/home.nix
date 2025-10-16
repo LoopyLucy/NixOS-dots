@@ -59,6 +59,7 @@
         dconf
         unzip
         p7zip
+        rar
         winetricks
         protontricks
         xdg-desktop-portal-gtk
