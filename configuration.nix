@@ -68,6 +68,7 @@
     libnotify
     glib
     usbutils
+    temurin-bin-21
   ];
 
   services.xserver.xkb = {
