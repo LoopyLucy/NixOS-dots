@@ -42,6 +42,7 @@
         obs-studio
         discord
         vencord
+        jetbrains.idea-community #Intellij IDEA Community
 
 
         #Games
