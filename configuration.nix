@@ -71,6 +71,12 @@
     temurin-bin-21
   ];
 
+  programs.nix-ld.enable = true;
+
+  programs.nix-ld.libraries = with pkgs; [
+    temurin-bin-21
+  ];
+
   services.xserver.xkb = {
     layout = "gb";
     variant = "";

@@ -43,6 +43,7 @@
         discord
         vencord
         jetbrains.idea-community #Intellij IDEA Community
+        vlc
 
 
         #Games
@@ -52,6 +53,9 @@
         inputs.nix-citizen.packages.${system}.star-citizen-umu
         xivlauncher
         modrinth-app
+
+        #Game Tools / Launchers
+        heroic-unwrapped
 
         #Tools
         btop
@@ -65,6 +69,8 @@
         protontricks
         xdg-desktop-portal-gtk
         limo
+        krita
+        krita-plugin-gmic
         #steamtinkerlaunch
 
         #Themeing
