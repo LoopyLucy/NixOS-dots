@@ -184,6 +184,13 @@
   
   services.flatpak.enable = true;
 
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 3";
+    flake = "/home/user/my-nixos-config"; # sets NH_OS_FLAKE variable for you
+  };
+
   users.users.erin = {
     isNormalUser = true;
     description = "Erin Lucy Fitton";
@@ -244,8 +251,10 @@
         la = "ls -a";
         ff = "fastfetch";
 
-        buildhome = "home-manager switch --flake ~/.nixos";
-        buildnix = "sudo nixos-rebuild switch --flake ~/.nixos";
+        buildhome = "nh home switch ~/.nixos";
+        buildnix = "nh os switch ~/.nixos";
+        #buildhome = "home-manager switch --flake ~/.nixos";
+        #buildnix = "sudo nixos-rebuild switch --flake ~/.nixos";
     };
   };
 

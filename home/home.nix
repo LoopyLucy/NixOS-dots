@@ -104,8 +104,10 @@
             la = "ls -a";
             ff = "fastfetch";
 
-            buildhome = "home-manager switch --flake ~/.nixos";
-            buildnix = "sudo nixos-rebuild switch --flake ~/.nixos";
+            #buildhome = "home-manager switch --flake ~/.nixos";
+            #buildnix = "sudo nixos-rebuild switch --flake ~/.nixos";
+            buildhome = "nh home switch --flake ~/.nixos";
+            buildnix = "nh os switch --flake ~/.nixos";
         };
     };
 

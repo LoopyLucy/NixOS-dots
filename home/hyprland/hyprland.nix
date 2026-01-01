@@ -82,10 +82,6 @@
                 enable_anr_dialog = false;
             };
 
-            #windowrulev2 = [
-            #    
-            #];
-
         };
 
     };

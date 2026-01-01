@@ -17,7 +17,7 @@ in {
 
     wayland.windowManager.hyprland.settings = {
 		windowrule = [
-			"stayfocused, class:^Rofi$"
+			"match:class ^Rofi$, stay_focused on, rounding 0"
 		];
 		bindr = [
 			"$mainMod, $mainMod_L, exec, pkill rofi || rofi -show drun -modi drun,filebrowser,run,window" #single tap $mainMod key open rofi

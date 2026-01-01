@@ -1,6 +1,8 @@
 { lib, pkgs, ... }:
 
-{
+let
+    wallpaper = toString "~/Pictures/Backgrounds/Background3.PNG";
+in {
     wayland.windowManager.hyprland.settings = {
         exec-once = [
             "systemctl --user start hyprpaper"
@@ -14,8 +16,8 @@
             ipc = "on";
             splash = false;
             splash_offset = 2.0;
-            #preload = wallpaper;
-            #wallpaper = " , ${wallpaper}";
+            preload = wallpaper;
+            wallpaper = " , ${wallpaper}";
         };
     };
 }
