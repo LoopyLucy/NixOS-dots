@@ -82,7 +82,7 @@
                 enable_anr_dialog = false;
             };
 
-            #windowrule = [
+            #windowrulev2 = [
             #    
             #];
 

@@ -34,7 +34,7 @@
     home.packages = with pkgs; [
         #Software
         inputs.zen-browser.packages."${system}".default
-        bitwarden
+        bitwarden-desktop
         logiops
         (bottles.override {removeWarningPopup = true;})
         kdePackages.qtwebengine
@@ -42,7 +42,7 @@
         obs-studio
         discord
         vencord
-        jetbrains.idea-community #Intellij IDEA Community
+        jetbrains.idea-oss #Intellij IDEA OSS
         vlc
 
 
@@ -68,7 +68,7 @@
         winetricks
         protontricks
         xdg-desktop-portal-gtk
-        limo
+        #limo
         krita
         krita-plugin-gmic
         #steamtinkerlaunch
@@ -142,9 +142,10 @@
 
     programs.git = {
         enable = true;
-        userName = "LoopyLucy";
-        userEmail = "erinlucyfitton@outlook.com";
-        extraConfig = {
+        settings = {
+            user.name = "LoopyLucy";
+            user.email = "erinlucyfitton@outlook.com";
+
             init.defaultBranch = "mistress";
         };
     };
