@@ -177,7 +177,6 @@
     pulse.enable = true;
   };
 
-  programs.adb.enable = true;
   programs.alvr.enable = true; 
   programs.alvr.openFirewall = true;
 

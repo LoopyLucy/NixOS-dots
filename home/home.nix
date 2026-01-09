@@ -33,7 +33,7 @@
     fonts.fontconfig.enable = true;
     home.packages = with pkgs; [
         #Software
-        inputs.zen-browser.packages."${system}".default
+        inputs.zen-browser.packages."${stdenv.hostPlatform.system}".default
         bitwarden-desktop
         logiops
         (bottles.override {removeWarningPopup = true;})
@@ -47,10 +47,10 @@
 
 
         #Games
-        #inputs.nix-gaming.packages.${pkgs.system}.star-citizen
-        #inputs.nix-citizen.packages.${system}.star-citizen
-        #inputs.nix-citizen.packages.${system}.star-citizen-git
-        inputs.nix-citizen.packages.${system}.star-citizen-umu
+        #inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.star-citizen
+        #inputs.nix-citizen.packages.${stdenv.hostPlatform.system}.star-citizen
+        #inputs.nix-citizen.packages.${stdenv.hostPlatform.system}.star-citizen-git
+        inputs.nix-citizen.packages.${stdenv.hostPlatform.system}.star-citizen-umu
         xivlauncher
         modrinth-app
 
