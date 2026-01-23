@@ -69,6 +69,7 @@
     glib
     usbutils
     temurin-bin-21
+    xorg.xrandr
   ];
 
   programs.nix-ld.enable = true;

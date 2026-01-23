@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 
 let
-    wallpaper = toString "~/Pictures/Backgrounds/Background3.PNG";
+    /*wallpaper = toString "~/Pictures/Backgrounds/Background3.PNG";*/
 in {
     wayland.windowManager.hyprland.settings = {
         exec-once = [
@@ -12,9 +12,11 @@ in {
 
     services.hyprpaper = {
         enable = true;
+        
         settings = {
-            preload = wallpaper;
-            wallpaper = " , ${wallpaper}";
+            splash = false;
+            /*preload = wallpaper;
+            wallpaper = " , ${wallpaper}";*/
         };
     };
 }
