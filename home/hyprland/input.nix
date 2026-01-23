@@ -15,36 +15,48 @@
 
             bind = [
                 # USER (Software)
-                "$mainMod, F,                exec, thunar"            
-                "$mainMod, B,                exec, zen-beta"
-                "$mainMod, T,                exec, kitty"
-                "$mainMod, K,                exec, konsole"
-                ",         Print,            exec, grimblast copy area"
-                
-                # System
-                "CTRL ALT, Delete,           exec, hyprctl dispatch exit 0"
-                "$mainMod SHIFT, R,          exec, pkill waybar || waybar"
-                
-                # Window Control
-                "$mainMod,       Q,          killactive,"
-                "$mainMod SHIFT, F,          fullscreen, 1"
-                "$mainMod SHIFT, SPACE,      togglefloating"
-                "$mainMod SHIFT, D,          split-movetoworkspace, +1"
-                "$mainMod SHIFT, A,          split-movetoworkspace, -1"
-                "$mainMod SHIFT, left,       split-movetoworkspace, +1"
-                "$mainMod SHIFT, right,      split-movetoworkspace, -1"
-                "$mainMod SHIFT, mouse_up,   split-movetoworkspace, +1"
-                "$mainMod SHIFT, mouse_down, split-movetoworkspace, -1"
-                
-                # Workspaces
-                "$mainMod, right,            split-workspace, +1"
-                "$mainMod, left,             split-workspace, -1"
-                "$mainMod, D,                split-workspace, +1"
-                "$mainMod, A,                split-workspace, -1"
-                "$mainMod, mouse_up,         split-workspace, +1"
-                "$mainMod, mouse_down,       split-workspace, -1"
-                "$mainMod, mouse_left,       split-workspace, +1"
-                "$mainMod, mouse_right,      split-workspace, -1"
+                "$mainMod, F,                     exec, thunar"            
+                "$mainMod, B,                     exec, zen-beta"
+                "$mainMod, T,                     exec, kitty"
+                "$mainMod, K,                     exec, konsole"
+                ",         Print,                 exec, grimblast copy area"
+                     
+                # System     
+                "CTRL ALT, Delete,                exec, hyprctl dispatch exit 0"
+                "$mainMod SHIFT, R,               exec, pkill waybar || waybar"
+                     
+                # Window Control     
+                "$mainMod,       Q,               killactive,"
+                "$mainMod SHIFT, F,               fullscreen, 1"
+                "$mainMod SHIFT, SPACE,           togglefloating"
+                "$mainMod SHIFT, D,               split-movetoworkspace, +1"
+                "$mainMod SHIFT, A,               split-movetoworkspace, -1"
+                "$mainMod SHIFT, left,            split-movetoworkspace, +1"
+                "$mainMod SHIFT, right,           split-movetoworkspace, -1"
+                "$mainMod SHIFT, mouse_up,        split-movetoworkspace, +1"
+                "$mainMod SHIFT, mouse_down,      split-movetoworkspace, -1"
+                "$mainMod SHIFT, mouse_right,     split-movetoworkspace, +1"
+                "$mainMod SHIFT, mouse_left,      split-movetoworkspace, -1"
+                     
+                # Workspaces     
+                "$mainMod, right,                 split-workspace, +1"
+                "$mainMod, left,                  split-workspace, -1"
+                "$mainMod, D,                     split-workspace, +1"
+                "$mainMod, A,                     split-workspace, -1"
+                "$mainMod, mouse_up,              split-workspace, +1"
+                "$mainMod, mouse_down,            split-workspace, -1"
+                "$mainMod, mouse_right,           split-workspace, +1"
+                "$mainMod, mouse_left,            split-workspace, -1"
+     
+                # Monitors     
+                "$mainMod ALT, right,             split-changemonitor, next"
+                "$mainMod ALT, left,              split-changemonitor, prev"
+                "$mainMod ALT, D,                 split-changemonitor, next"
+                "$mainMod ALT, A,                 split-changemonitor, prev"
+                "$mainMod ALT, mouse_up,          split-changemonitor, next"
+                "$mainMod ALT, mouse_down,        split-changemonitor, prev"
+                "$mainMod ALT, mouse_right,       split-changemonitor, next"
+                "$mainMod ALT, mouse_left,        split-changemonitor, prev"
             ]
             ++ (
                 # workspaces
