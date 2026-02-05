@@ -3,11 +3,13 @@
 
     inputs = {
         nixpkgs.url = "nixpkgs/nixos-unstable";
-        
+
         home-manager = {
             url = "github:nix-community/home-manager/master";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+
+        nvf.url = "github:notashelf/nvf";
         
         hyprland.url = "github:hyprwm/Hyprland";
         hyprland-plugins = {
@@ -29,7 +31,7 @@
         nix-citizen.url = "github:LovingMelody/nix-citizen";
     };
 
-    outputs = inputs@{ self, nixpkgs, home-manager, split-monitor-workspaces, zen-browser, nix-gaming, nix-citizen,... }:
+    outputs = inputs@{ self, nixpkgs, home-manager, nvf, split-monitor-workspaces, zen-browser, nix-gaming, nix-citizen,... }:
         let
             inherit (self) outputs;
             lib = nixpkgs.lib;
@@ -41,14 +43,19 @@
                 erin-desktop = lib.nixosSystem {
                     inherit system;
                     specialArgs = { inherit inputs outputs; };
-                    modules = [ ./configuration.nix ];
+                    modules = [ 
+                        ./configuration.nix
+                        nvf.nixosModules.default 
+                    ];
                 };
             };
             homeConfigurations = {
                 erin = home-manager.lib.homeManagerConfiguration {
                     inherit pkgs;
                     extraSpecialArgs = { inherit inputs outputs; };
-                    modules = [ ./home/home.nix ];
+                    modules = [ 
+                        ./home/home.nix
+                    ];
                 };
             };
         };

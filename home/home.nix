@@ -44,6 +44,7 @@
         vencord
         jetbrains.idea-oss #Intellij IDEA OSS
         vlc
+        blockbench
 
 
         #Games
@@ -83,9 +84,8 @@
 
     programs.nix-your-shell.enable = true;
     programs.fastfetch.enable = true;
-    programs.neovim.enable = true;
     programs.vesktop.enable = true;
-    
+
     programs.kitty = { 
         enable = true;
         shellIntegration.enableZshIntegration = true;
@@ -113,6 +113,16 @@
 
     programs.zsh = {
         enable = true;
+        shellAliases = {
+            ll = "ls -l";
+            ".." = "cd ..";
+            la = "ls -a";
+            ff = "fastfetch";
+            c = "clear";
+
+            buildhome = "nh home switch --flake ~/.nixos";
+            buildnix = "nh os switch --flake ~/.nixos";
+        };
         plugins = [
             {
                 name = "powerlevel10k-config";
@@ -140,6 +150,12 @@
 
     programs.yazi = {
         enable = true;
+        enableZshIntegration = true;
+        settings.opener.edit = [{
+            run = "nvim \"$@\"";
+            block = true;
+            desc = "Edit with Neovim";
+        }];
     };
 
     programs.git = {

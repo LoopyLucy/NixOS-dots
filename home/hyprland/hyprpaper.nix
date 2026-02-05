@@ -1,12 +1,10 @@
 { lib, pkgs, ... }:
 
-let
-    /*wallpaper = toString "~/Pictures/Backgrounds/Background3.PNG";*/
-in {
+{
     wayland.windowManager.hyprland.settings = {
         exec-once = [
             "systemctl --user start hyprpaper"
-            "sleep 1; bash ~/.config/hypr/scripts/RandBackground.sh"
+            "sleep 5; bash ~/.config/hypr/scripts/RandBackground.sh"
         ];
     };
 
@@ -15,8 +13,6 @@ in {
         
         settings = {
             splash = false;
-            /*preload = wallpaper;
-            wallpaper = " , ${wallpaper}";*/
         };
     };
 }

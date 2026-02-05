@@ -210,6 +210,7 @@
       thunar-media-tags-plugin
     ];
   };
+
   programs.xfconf.enable = true;
   services.gvfs = {
     enable = true;
@@ -250,12 +251,77 @@
         ".." = "cd ..";
         la = "ls -a";
         ff = "fastfetch";
+        f = "yy";
 
         buildhome = "nh home switch ~/.nixos";
         buildnix = "nh os switch ~/.nixos";
         #buildhome = "home-manager switch --flake ~/.nixos";
         #buildnix = "sudo nixos-rebuild switch --flake ~/.nixos";
     };
+  };
+
+  programs.nvf = {
+      enable = true;
+      settings = {
+          vim = {
+              theme = {
+                  enable = true;
+                  name = "tokyonight";
+                  style = "night";
+              };
+
+              binds = {
+                  whichKey.enable = true;
+              };
+              
+              languages = {
+                  enableLSP = true;
+                  enableTreesitter = true;
+      
+                  nix.enable = true;
+                  java.enable = true;
+                  rust.enable = true;
+                  ts.enable = true;
+                  json.enable = true;
+              };
+
+              lsp.trouble.enable = true;
+
+              statusline.lualine.enable = true;
+              telescope.enable = true;
+              lazy.enable = true;
+
+              ui.noice.enable = true;
+
+              diagnostics.nvim-lint.enable = true;
+
+              dashboard.startify.sessionPersistence = true;
+
+              notes.todo-comments.enable = true;
+
+              autocomplete.blink-cmp = {
+                enable = true;
+                friendly-snippets.enable = true;
+              };
+
+              filetree.neo-tree.enable = true;
+
+              mini = {
+                  ai.enable = true;
+                  icons.enable = true;
+                  pairs.enable = true;
+              };
+
+              tabline.nvimBufferline.enable = true;
+
+              utility.motion.flash-nvim.enable = true;
+    
+              clipboard = {
+                  enable = true;
+                  providers.wl-copy.enable = true;
+              };
+          };
+      };
   };
 
   nixpkgs.config = {
