@@ -45,6 +45,8 @@
         jetbrains.idea-oss #Intellij IDEA OSS
         vlc
         blockbench
+        android-studio
+        obsidian
 
 
         #Games
@@ -59,7 +61,6 @@
         heroic-unwrapped
 
         #Tools
-        android-studio
         btop
         wev
         piper
