@@ -245,19 +245,6 @@
     };
 
     histSize = 10000;
-
-    shellAliases = {
-        ll = "ls -l";
-        ".." = "cd ..";
-        la = "ls -a";
-        ff = "fastfetch";
-        f = "yy";
-
-        buildhome = "nh home switch ~/.nixos";
-        buildnix = "nh os switch ~/.nixos";
-        #buildhome = "home-manager switch --flake ~/.nixos";
-        #buildnix = "sudo nixos-rebuild switch --flake ~/.nixos";
-    };
   };
 
   programs.nvf = {

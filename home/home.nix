@@ -59,6 +59,7 @@
         heroic-unwrapped
 
         #Tools
+        android-studio
         btop
         wev
         piper
@@ -106,23 +107,26 @@
 
             #buildhome = "home-manager switch --flake ~/.nixos";
             #buildnix = "sudo nixos-rebuild switch --flake ~/.nixos";
-            buildhome = "nh home switch --flake ~/.nixos";
-            buildnix = "nh os switch --flake ~/.nixos";
+            buildhome = "nh home switch ~/.nixos";
+            buildnix = "nh os switch ~/.nixos";
         };
     };
 
     programs.zsh = {
         enable = true;
+
         shellAliases = {
             ll = "ls -l";
             ".." = "cd ..";
             la = "ls -a";
             ff = "fastfetch";
             c = "clear";
+            f = "yy";
 
-            buildhome = "nh home switch --flake ~/.nixos";
-            buildnix = "nh os switch --flake ~/.nixos";
+            buildhome = "nh home switch ~/.nixos";
+            buildnix = "nh os switch ~/.nixos";
         };
+
         plugins = [
             {
                 name = "powerlevel10k-config";
