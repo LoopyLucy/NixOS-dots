@@ -69,7 +69,7 @@
     glib
     usbutils
     temurin-bin-21
-    xorg.xrandr
+    xrandr
   ];
 
   programs.nix-ld.enable = true;
@@ -262,7 +262,7 @@
               };
               
               languages = {
-                  enableLSP = true;
+                  #enableLSP = true;
                   enableTreesitter = true;
       
                   nix.enable = true;
@@ -272,19 +272,19 @@
                   json.enable = true;
               };
 
-              lsp.trouble.enable = true;
+              lsp = {
+                enable = true;
+                trouble.enable = true;
+              };  
 
               statusline.lualine.enable = true;
               telescope.enable = true;
               lazy.enable = true;
-
               ui.noice.enable = true;
-
               diagnostics.nvim-lint.enable = true;
+              notes.todo-comments.enable = true;
 
               dashboard.startify.sessionPersistence = true;
-
-              notes.todo-comments.enable = true;
 
               autocomplete.blink-cmp = {
                 enable = true;

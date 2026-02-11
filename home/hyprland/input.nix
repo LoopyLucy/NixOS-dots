@@ -28,6 +28,7 @@
                 # Window Control     
                 "$mainMod,       Q,               killactive,"
                 "$mainMod SHIFT, F,               fullscreen, 1"
+                "$mainMod ALT,   F,                fullscreen"
                 "$mainMod SHIFT, SPACE,           togglefloating"
                 "$mainMod SHIFT, D,               split-movetoworkspace, +1"
                 "$mainMod SHIFT, A,               split-movetoworkspace, -1"
