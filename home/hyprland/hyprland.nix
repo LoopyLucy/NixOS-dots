@@ -82,6 +82,16 @@
                 enable_anr_dialog = false;
             };
 
+            windowrule = [
+                "center 1, match:float 1"
+
+                "tile 1,  match:initial_class ^(steam)$"
+                "float 1, match:initial_class ^(steam)$, match:title ^(Steam - Self Updater)$"
+                "float 1, match:initial_class ^(steam)$, match:title ^(Steam Settings)$"
+                "float 1, match:initial_class ^(steam)$, match:title ^(Friends List)$"
+                "max_size 600 1080, match:initial_class ^(steam)$, match:title ^(Friends List)$"
+            ];
+
         };
 
     };
