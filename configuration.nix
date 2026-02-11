@@ -14,6 +14,7 @@
     ];
 
   hardware.bluetooth.enable = true;
+  hardware.steam-hardware.enable = true;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -21,7 +22,7 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
-  boot.kernelModules = [ "v4l2loopback" ];
+  boot.kernelModules = [ "v4l2loopback" "uinput" ];
   boot.extraModprobeConfig = ''
       options v4l2loopback video_nr=2,3 width=640,1920 max_width=1920 height=480,1080 max_height=1080 format=YU12,YU12 exclusive_caps=1,1 card_label=Phone,Laptop debug=1
     '';
@@ -178,6 +179,10 @@
     pulse.enable = true;
   };
 
+  services.udev.packages = with pkgs; [ 
+    game-devices-udev-rules 
+  ];
+
   programs.alvr.enable = true; 
   programs.alvr.openFirewall = true;
 
@@ -227,6 +232,8 @@
     enable = true;
     gamescopeSession.enable = true;
     platformOptimizations.enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
     extraCompatPackages = with pkgs; [
       proton-ge-bin
     ];
