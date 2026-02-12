@@ -71,6 +71,7 @@
     usbutils
     temurin-bin-21
     xrandr
+    socat
   ];
 
   programs.nix-ld.enable = true;

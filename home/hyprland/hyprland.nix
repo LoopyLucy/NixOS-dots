@@ -85,11 +85,14 @@
             windowrule = [
                 "center 1, match:float 1"
 
-                "tile 1,  match:initial_class ^(steam)$"
-                "float 1, match:initial_class ^(steam)$, match:title ^(Steam - Self Updater)$"
-                "float 1, match:initial_class ^(steam)$, match:title ^(Steam Settings)$"
-                "float 1, match:initial_class ^(steam)$, match:title ^(Friends List)$"
-                "max_size 600 1080, match:initial_class ^(steam)$, match:title ^(Friends List)$"
+                # Steam
+                "tile 1,  match:initial_class ^([Ss]team)$"
+                "float 1, match:initial_class ^([Ss]team)$, match:title ^(Steam - Self Updater|Steam Settings|Friends List)$"
+                "max_size 600 1080, match:initial_class ^([Ss]team)$, match:title ^(Friends List)$"
+
+                # Floating
+                "float 1, match:class ([Tt]hunar), match:title negative:(.*[Tt]hunar.*)"
+                "float 1, match:title ^(Picture-in-Picture)$"
             ];
 
         };
