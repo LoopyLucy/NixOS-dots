@@ -30,6 +30,7 @@
       options v4l2loopback video_nr=2,3 width=640,1920 max_width=1920 height=480,1080 max_height=1080 format=YU12,YU12 exclusive_caps=1,1 card_label=Phone,Laptop debug=1
     '';
   };
+<<<<<<< HEAD
 
   users.users.erin = {
     isNormalUser = true;
@@ -41,6 +42,9 @@
     ];
   };
 
+=======
+  
+>>>>>>> 7e187510520c2ef27b51cb785ac18f16b2de3f82
   security.polkit.enable = true;
 
   networking.hostName = "erin-desktop";
