@@ -40,6 +40,7 @@
     packages = with pkgs; [
       kdePackages.kate
       thunderbird
+      gparted
     ];
   };
 
