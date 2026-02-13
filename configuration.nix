@@ -16,16 +16,31 @@
   hardware.bluetooth.enable = true;
   hardware.steam-hardware.enable = true;
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_latest;
 
-  boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
-  boot.kernelModules = [ "v4l2loopback" "uinput" ];
-  boot.extraModprobeConfig = ''
+    extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+    kernelModules = [ "v4l2loopback" "uinput" ];
+    extraModprobeConfig = ''
       options v4l2loopback video_nr=2,3 width=640,1920 max_width=1920 height=480,1080 max_height=1080 format=YU12,YU12 exclusive_caps=1,1 card_label=Phone,Laptop debug=1
     '';
+  };
+
+  users.users.erin = {
+    isNormalUser = true;
+    description = "Erin Lucy Fitton";
+    extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs; [
+      kdePackages.kate
+      thunderbird
+    ];
+  };
+
   security.polkit.enable = true;
 
   networking.hostName = "erin-desktop";
@@ -210,16 +225,6 @@
     clean.enable = true;
     clean.extraArgs = "--keep-since 4d --keep 3";
     flake = "/home/user/my-nixos-config"; # sets NH_OS_FLAKE variable for you
-  };
-
-  users.users.erin = {
-    isNormalUser = true;
-    description = "Erin Lucy Fitton";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      kdePackages.kate
-      thunderbird
-    ];
   };
 
   programs.thunar = {
