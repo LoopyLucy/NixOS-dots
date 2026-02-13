@@ -35,6 +35,8 @@
     isNormalUser = true;
     description = "Erin Lucy Fitton";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.zsh;
+
     packages = with pkgs; [
       kdePackages.kate
       thunderbird
@@ -74,33 +76,41 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    pkgs.cifs-utils
-    samba
-    libratbag
-    v4l-utils
-    blueman
-    android-tools
-    libnotify
-    glib
-    usbutils
-    temurin-bin-21
-    xrandr
-    socat
-  ];
+  environment = {
+    sessionVariables.NIXOS_OZONE_WL = "1";
 
-  fonts.packages = with pkgs; [
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-cjk-serif
-    noto-fonts-color-emoji
-  ];
+    systemPackages = with pkgs; [
+      pkgs.cifs-utils
+      samba
+      libratbag
+      v4l-utils
+      blueman
+      android-tools
+      libnotify
+      glib
+      usbutils
+      temurin-bin-21
+      xrandr
+      socat
+    ];
 
-  fonts.fontconfig = {
-    defaultFonts = {
-      serif = [ "Noto Serif" "Noto Serif CJK JP" ];
-      sansSerif = [ "Noto Sans" "Noto Sans CJK JP" ];
-      monospace = [ "Noto Sans Mono" "Noto Sans Mono CJK JP" ];
+    shells = with pkgs; [ 
+      zsh 
+      bashInteractive
+    ];
+  };
+
+  fonts = {
+    packages = with pkgs; [
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      noto-fonts-color-emoji
+    ];
+    fontconfig.defaultFonts = {
+        serif = [ "Noto Serif" "Noto Serif CJK JP" ];
+        sansSerif = [ "Noto Sans" "Noto Sans CJK JP" ];
+        monospace = [ "Noto Sans Mono" "Noto Sans Mono CJK JP" ];
     };
   };
 
@@ -344,8 +354,6 @@
   };
 
   services.ratbagd.enable = true;
-
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   services.openssh.enable = true;
 
