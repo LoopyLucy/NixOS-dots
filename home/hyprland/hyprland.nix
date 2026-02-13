@@ -83,15 +83,17 @@
             };
 
             windowrule = [
-                "center 1, match:float 1"
+                #"center 1, match:float 1" #This was an extremely bad idea!
 
                 # Steam
                 "tile 1,  match:initial_class ^([Ss]team)$"
                 "float 1, match:initial_class ^([Ss]team)$, match:title ^(Steam - Self Updater|Steam Settings|Friends List)$"
+                "center 1, match:initial_class ^([Ss]team)$, match:title ^(Steam - Self Updater|Steam Settings|Friends List)$"
                 "max_size 600 1080, match:initial_class ^([Ss]team)$, match:title ^(Friends List)$"
 
                 # Floating
                 "float 1, match:class ([Tt]hunar), match:title negative:(.*[Tt]hunar.*)"
+                "center 1, match:class ([Tt]hunar), match:title negative:(.*[Tt]hunar.*)"
                 "float 1, match:title ^(Picture-in-Picture)$"
             ];
 
