@@ -47,6 +47,9 @@
         blockbench
         android-studio
         obsidian
+        krita
+        krita-plugin-gmic
+        deluge
 
 
         #Games
@@ -61,19 +64,19 @@
         heroic-unwrapped
 
         #Tools
-        btop
+        xdg-desktop-portal-gtk
+        
         wev
         piper
         dconf
+        btop
         unzip
         p7zip
         rar
         winetricks
         protontricks
-        xdg-desktop-portal-gtk
+
         #limo
-        krita
-        krita-plugin-gmic
         #steamtinkerlaunch
 
         #Themeing
