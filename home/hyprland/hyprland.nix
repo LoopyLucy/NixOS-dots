@@ -85,6 +85,13 @@
             windowrule = [
                 #"center 1, match:float 1" #This was an extremely bad idea!
 
+                #Tags
+                "tag +games, match:class ^([Hh]ytale[Cc]lient)"
+
+                #Overrides
+                "no_blur 1, match:tag games*"
+                "opacity 1.0 override, match:tag games*"
+
                 # Steam
                 "tile 1,  match:initial_class ^([Ss]team)$"
                 "float 1, match:initial_class ^([Ss]team)$, match:title ^(Steam - Self Updater|Steam Settings|Friends List)$"
