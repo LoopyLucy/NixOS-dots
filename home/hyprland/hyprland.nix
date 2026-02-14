@@ -90,10 +90,9 @@
                 "tag +media, match:class ^(vlc|com.stremio.stremio)"
 
                 #Overrides
-                "no_blur 1, match:tag games*"
-                "no_blur 1, match:tag media*"
                 "opacity 1.0 override, match:tag games*"
                 "opacity 1.0 override, match:tag media*"
+                "opacity 1.0 override, match:class ^(zen-beta)"
 
                 # Steam
                 "tile 1,  match:initial_class ^([Ss]team)$"
