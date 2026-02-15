@@ -62,19 +62,6 @@
       #allowedUDPPorts = [ ... ];
     };
   };
-  networking = {
-    hostName = "erin-desktop";
-    networkmanager.enable = true;
-
-    firewall = {
-      enable = true;
-      allowPing = true;
-      extraCommands = ''iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns'';
-      # Open ports in the firewall.
-      #allowedTCPPorts = [ ... ];
-      #allowedUDPPorts = [ ... ];
-    };
-  };
 
   time.timeZone = "Europe/London";
   i18n.defaultLocale = "en_GB.UTF-8";
@@ -93,8 +80,6 @@
 
   services = {
     desktopManager.plasma6.enable = true;
-  services = {
-    desktopManager.plasma6.enable = true;
 
     blueman.enable = true;
     pulseaudio.enable = false;
@@ -113,28 +98,7 @@
         wayland.enable = true;
       };
     };
-    blueman.enable = true;
-    pulseaudio.enable = false;
-    flatpak.enable = true;
-    ratbagd.enable = true;
-    openssh.enable = true;
-    tumbler.enable = true;
 
-    displayManager = {
-      autoLogin.enable = true;
-      autoLogin.user = "erin";
-      sessionPackages = [ inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland ];
-      defaultSession = "hyprland";
-      sddm = {
-        enable = true;
-        wayland.enable = true;
-      };
-    };
-
-    xserver.xkb = {
-      layout = "gb";
-      variant = "";
-    };
     xserver.xkb = {
       layout = "gb";
       variant = "";
@@ -179,134 +143,12 @@
         };
       };
     };
-    samba = {
-      enable = true;
-      openFirewall = true;
-      settings = {
-        global = {
-          "workgroup" = "WORKGROUP";
-          "server string" = "smbnix";
-          "netbios name" = "smbnix";
-          "security" = "user";
-          #"use sendfile" = "yes";
-          #"max protocol" = "smb2";
-          # note: localhost is the ipv6 localhost ::1
-          "hosts allow" = "192.168.0. 127.0.0.1 localhost";
-          "hosts deny" = "0.0.0.0/0";
-          "guest account" = "nobody";
-          "map to guest" = "bad user";
-        };
-        "public" = {
-          "path" = "/mnt/Shares/Public";
-          "browseable" = "yes";
-          "read only" = "no";
-          "guest ok" = "yes";
-          "create mask" = "0644";
-          "directory mask" = "0755";
-          "force user" = "username";
-          "force group" = "groupname";
-        };
-        "private" = {
-          "path" = "/mnt/Shares/Private";
-          "browseable" = "yes";
-          "read only" = "no";
-          "guest ok" = "no";
-          "create mask" = "0644";
-          "directory mask" = "0755";
-          "force user" = "username";
-          "force group" = "groupname";
-        };
-      };
-    };
-
-    samba-wsdd = {
-      enable = true;
-      openFirewall = true;
-    };
+    
     samba-wsdd = {
       enable = true;
       openFirewall = true;
     };
 
-    avahi = {
-      enable = true;
-      nssmdns4 = true;
-      openFirewall = true;
-      publish = {
-        enable = true;
-        userServices = true;
-      };
-    };
-
-    printing = {
-      enable = true;
-      drivers = with pkgs; [
-        cups-filters
-        cups-browsed
-        gutenprint
-      ];
-  
-      listenAddresses = [ "*:631" ];
-      allowFrom = [ "all" ];
-      browsing = true;
-      defaultShared = true;
-      openFirewall = true;
-    };
-
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-    };
-
-    gvfs = {
-      enable = true;
-      package = lib.mkForce pkgs.gnome.gvfs;
-    };
-
-    udev.packages = with pkgs; [ game-devices-udev-rules ];
-  };
-
-  environment = {
-    sessionVariables.NIXOS_OZONE_WL = "1";
-
-    systemPackages = with pkgs; [
-      pkgs.cifs-utils
-      samba
-      libratbag
-      v4l-utils
-      blueman
-      android-tools
-      libnotify
-      glib
-      usbutils
-      temurin-bin-21
-      xrandr
-      socat
-    ];
-
-    shells = with pkgs; [ 
-      zsh 
-      bashInteractive
-    ];
-  };
-
-  fonts = {
-    packages = with pkgs; [
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-cjk-serif
-      noto-fonts-color-emoji
-    ];
-    fontconfig.defaultFonts = {
-        serif = [ "Noto Serif" "Noto Serif CJK JP" ];
-        sansSerif = [ "Noto Sans" "Noto Sans CJK JP" ];
-        monospace = [ "Noto Sans Mono" "Noto Sans Mono CJK JP" ];
-    };
-  };
-
-  console.keyMap = "uk";
     avahi = {
       enable = true;
       nssmdns4 = true;
@@ -400,9 +242,9 @@
   #];
 
   programs = {
-    nix-ld.enable = true;
     xfconf.enable = true;
 
+    nix-ld.enable = true;
     nix-ld.libraries = with pkgs; [
       temurin-bin-21
     ];
@@ -428,35 +270,12 @@
         thunar-media-tags-plugin
       ];
     };
-    thunar = {
-      enable = true;
-      plugins = with pkgs; [
-        thunar-archive-plugin
-        thunar-volman
-        thunar-vcs-plugin
-        thunar-media-tags-plugin
-      ];
-    };
 
     gamescope = {
       enable = true;
       capSysNice = true;
     };
-    gamescope = {
-      enable = true;
-      capSysNice = true;
-    };
 
-    steam = {
-      enable = true;
-      gamescopeSession.enable = true;
-      platformOptimizations.enable = true;
-      remotePlay.openFirewall = true;
-      dedicatedServer.openFirewall = true;
-      extraCompatPackages = with pkgs; [
-        proton-ge-bin
-      ];
-    };
     steam = {
       enable = true;
       gamescopeSession.enable = true;
@@ -482,22 +301,7 @@
   
       histSize = 10000;
     };
-    zsh = {
-      enable = true;
-  
-      enableCompletion = true;
-      autosuggestions.enable = true;
-      syntaxHighlighting.enable = true;
-  
-      ohMyZsh = {
-        enable = true;
-        plugins = ["git" "sudo"];
-      };
-  
-      histSize = 10000;
-    };
 
-    nvf = {
     nvf = {
       enable = true;
       settings = {
@@ -507,27 +311,7 @@
             name = "tokyonight";
             style = "night";
           };
-        vim = {
-          theme = {
-            enable = true;
-            name = "tokyonight";
-            style = "night";
-          };
 
-          binds = {
-            whichKey.enable = true;
-          };
-          
-          languages = {
-            #enableLSP = true;
-            enableTreesitter = true;
-
-            nix.enable = true;
-            java.enable = true;
-            rust.enable = true;
-            ts.enable = true;
-            json.enable = true;
-          };
           binds = {
             whichKey.enable = true;
           };
@@ -546,18 +330,8 @@
           lsp = {
             enable = true;
             trouble.enable = true;
-          };  
-          lsp = {
-            enable = true;
-            trouble.enable = true;
-          };  
-
-          statusline.lualine.enable = true;
-          telescope.enable = true;
-          lazy.enable = true;
-          ui.noice.enable = true;
-          diagnostics.nvim-lint.enable = true;
-          notes.todo-comments.enable = true;
+          };
+          
           statusline.lualine.enable = true;
           telescope.enable = true;
           lazy.enable = true;
@@ -566,18 +340,12 @@
           notes.todo-comments.enable = true;
 
           dashboard.startify.sessionPersistence = true;
-          dashboard.startify.sessionPersistence = true;
 
           autocomplete.blink-cmp = {
             enable = true;
             friendly-snippets.enable = true;
           };
-          autocomplete.blink-cmp = {
-            enable = true;
-            friendly-snippets.enable = true;
-          };
 
-          filetree.neo-tree.enable = true;
           filetree.neo-tree.enable = true;
 
           mini = {
@@ -585,24 +353,9 @@
             icons.enable = true;
             pairs.enable = true;
           };
-          mini = {
-            ai.enable = true;
-            icons.enable = true;
-            pairs.enable = true;
-          };
 
           tabline.nvimBufferline.enable = true;
-          tabline.nvimBufferline.enable = true;
 
-          utility.motion.flash-nvim.enable = true;
-
-          clipboard = {
-            enable = true;
-            providers.wl-copy.enable = true;
-          };
-        };
-      };
-    };
           utility.motion.flash-nvim.enable = true;
 
           clipboard = {
