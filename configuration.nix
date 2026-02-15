@@ -13,8 +13,10 @@
       inputs.nix-gaming.nixosModules.wine
     ];
 
-  hardware.bluetooth.enable = true;
-  hardware.steam-hardware.enable = true;
+  hardware = {
+    bluetooth.enable = true;
+    steam-hardware.enable = true;
+  };
 
   boot = {
     loader = {
@@ -46,8 +48,19 @@
 
   security.polkit.enable = true;
 
-  networking.hostName = "erin-desktop";
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = "erin-desktop";
+    networkmanager.enable = true;
+
+    firewall = {
+      enable = true;
+      allowPing = true;
+      extraCommands = ''iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns'';
+      # Open ports in the firewall.
+      #allowedTCPPorts = [ ... ];
+      #allowedUDPPorts = [ ... ];
+    };
+  };
 
   time.timeZone = "Europe/London";
   i18n.defaultLocale = "en_GB.UTF-8";
@@ -64,17 +77,115 @@
     LC_TIME = "en_GB.UTF-8";
   };
 
-  services.desktopManager.plasma6.enable = true;
+  services = {
+    desktopManager.plasma6.enable = true;
 
-  services.displayManager = {
-    autoLogin.enable = true;
-    autoLogin.user = "erin";
-    sessionPackages = [ inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland ];
-    defaultSession = "hyprland";
-    sddm = {
-      enable = true;
-      wayland.enable = true;
+    blueman.enable = true;
+    pulseaudio.enable = false;
+    flatpak.enable = true;
+    ratbagd.enable = true;
+    openssh.enable = true;
+    tumbler.enable = true;
+
+    displayManager = {
+      autoLogin.enable = true;
+      autoLogin.user = "erin";
+      sessionPackages = [ inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland ];
+      defaultSession = "hyprland";
+      sddm = {
+        enable = true;
+        wayland.enable = true;
+      };
     };
+
+    xserver.xkb = {
+      layout = "gb";
+      variant = "";
+    };
+
+    samba = {
+      enable = true;
+      openFirewall = true;
+      settings = {
+        global = {
+          "workgroup" = "WORKGROUP";
+          "server string" = "smbnix";
+          "netbios name" = "smbnix";
+          "security" = "user";
+          #"use sendfile" = "yes";
+          #"max protocol" = "smb2";
+          # note: localhost is the ipv6 localhost ::1
+          "hosts allow" = "192.168.0. 127.0.0.1 localhost";
+          "hosts deny" = "0.0.0.0/0";
+          "guest account" = "nobody";
+          "map to guest" = "bad user";
+        };
+        "public" = {
+          "path" = "/mnt/Shares/Public";
+          "browseable" = "yes";
+          "read only" = "no";
+          "guest ok" = "yes";
+          "create mask" = "0644";
+          "directory mask" = "0755";
+          "force user" = "username";
+          "force group" = "groupname";
+        };
+        "private" = {
+          "path" = "/mnt/Shares/Private";
+          "browseable" = "yes";
+          "read only" = "no";
+          "guest ok" = "no";
+          "create mask" = "0644";
+          "directory mask" = "0755";
+          "force user" = "username";
+          "force group" = "groupname";
+        };
+      };
+    };
+
+    samba-wsdd = {
+      enable = true;
+      openFirewall = true;
+    };
+
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+      publish = {
+        enable = true;
+        userServices = true;
+      };
+    };
+
+    printing = {
+      enable = true;
+      drivers = with pkgs; [
+        cups-filters
+        cups-browsed
+        gutenprint
+      ];
+  
+      listenAddresses = [ "*:631" ];
+      allowFrom = [ "all" ];
+      browsing = true;
+      defaultShared = true;
+      openFirewall = true;
+    };
+
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
+
+    gvfs = {
+      enable = true;
+      package = lib.mkForce pkgs.gnome.gvfs;
+    };
+
+    udev.packages = with pkgs; [ game-devices-udev-rules ];
   };
 
   environment = {
@@ -115,88 +226,7 @@
     };
   };
 
-  programs.nix-ld.enable = true;
-
-  programs.nix-ld.libraries = with pkgs; [
-    temurin-bin-21
-  ];
-
-  services.xserver.xkb = {
-    layout = "gb";
-    variant = "";
-  };
-
   console.keyMap = "uk";
-
-  services.samba = {
-    enable = true;
-    openFirewall = true;
-    settings = {
-      global = {
-        "workgroup" = "WORKGROUP";
-        "server string" = "smbnix";
-        "netbios name" = "smbnix";
-        "security" = "user";
-        #"use sendfile" = "yes";
-        #"max protocol" = "smb2";
-        # note: localhost is the ipv6 localhost ::1
-        "hosts allow" = "192.168.0. 127.0.0.1 localhost";
-        "hosts deny" = "0.0.0.0/0";
-        "guest account" = "nobody";
-        "map to guest" = "bad user";
-      };
-      "public" = {
-        "path" = "/mnt/Shares/Public";
-        "browseable" = "yes";
-        "read only" = "no";
-        "guest ok" = "yes";
-        "create mask" = "0644";
-        "directory mask" = "0755";
-        "force user" = "username";
-        "force group" = "groupname";
-      };
-      "private" = {
-        "path" = "/mnt/Shares/Private";
-        "browseable" = "yes";
-        "read only" = "no";
-        "guest ok" = "no";
-        "create mask" = "0644";
-        "directory mask" = "0755";
-        "force user" = "username";
-        "force group" = "groupname";
-      };
-    };
-  };
-
-  services.samba-wsdd = {
-    enable = true;
-    openFirewall = true;
-  };
-
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    openFirewall = true;
-    publish = {
-      enable = true;
-      userServices = true;
-    };
-  };
-  
-  services.printing = {
-    enable = true;
-    drivers = with pkgs; [
-      cups-filters
-      cups-browsed
-      gutenprint
-    ];
-
-    listenAddresses = [ "*:631" ];
-    allowFrom = [ "all" ];
-    browsing = true;
-    defaultShared = true;
-    openFirewall = true;
-  };
 
   #hardware.printers.ensurePrinters = [
   #  {
@@ -210,161 +240,137 @@
   #  }
   #];
 
-  services.blueman.enable = true;
-
-  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
 
-  services.udev.packages = with pkgs; [ 
-    game-devices-udev-rules 
-  ];
+  programs = {
+    nix-ld.enable = true;
+    xfconf.enable = true;
 
-  programs.alvr.enable = true; 
-  programs.alvr.openFirewall = true;
-
-  
-  services.flatpak.enable = true;
-
-  programs.nh = {
-    enable = true;
-    clean.enable = true;
-    clean.extraArgs = "--keep-since 4d --keep 3";
-    flake = "/home/user/my-nixos-config"; # sets NH_OS_FLAKE variable for you
-  };
-
-  programs.thunar = {
-    enable = true;
-    plugins = with pkgs; [
-      thunar-archive-plugin
-      thunar-volman
-      thunar-vcs-plugin
-      thunar-media-tags-plugin
+    nix-ld.libraries = with pkgs; [
+      temurin-bin-21
     ];
-  };
 
-  programs.xfconf.enable = true;
-  services.gvfs = {
-    enable = true;
-    package = lib.mkForce pkgs.gnome.gvfs;
-  };
-  services.tumbler.enable = true;
-
-  programs.gamescope = {
-    enable = true;
-    capSysNice = true;
-  };
-
-  programs.steam = {
-    enable = true;
-    gamescopeSession.enable = true;
-    platformOptimizations.enable = true;
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
-    extraCompatPackages = with pkgs; [
-      proton-ge-bin
-    ];
-  };
-
-  programs.zsh = {
-    enable = true;
-
-    enableCompletion = true;
-    autosuggestions.enable = true;
-    syntaxHighlighting.enable = true;
-
-    ohMyZsh = {
-      enable = true;
-      plugins = ["git" "sudo"];
+    alvr = { 
+      enable = true; 
+      openFirewall = true;
     };
 
-    histSize = 10000;
-  };
+    nh = {
+      enable = true;
+      clean.enable = true;
+      clean.extraArgs = "--keep-since 4d --keep 3";
+      flake = "/home/user/my-nixos-config"; # sets NH_OS_FLAKE variable for you
+    };
 
-  programs.nvf = {
+    thunar = {
+      enable = true;
+      plugins = with pkgs; [
+        thunar-archive-plugin
+        thunar-volman
+        thunar-vcs-plugin
+        thunar-media-tags-plugin
+      ];
+    };
+
+    gamescope = {
+      enable = true;
+      capSysNice = true;
+    };
+
+    steam = {
+      enable = true;
+      gamescopeSession.enable = true;
+      platformOptimizations.enable = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
+      extraCompatPackages = with pkgs; [
+        proton-ge-bin
+      ];
+    };
+
+    zsh = {
+      enable = true;
+  
+      enableCompletion = true;
+      autosuggestions.enable = true;
+      syntaxHighlighting.enable = true;
+  
+      ohMyZsh = {
+        enable = true;
+        plugins = ["git" "sudo"];
+      };
+  
+      histSize = 10000;
+    };
+
+    nvf = {
       enable = true;
       settings = {
-          vim = {
-              theme = {
-                  enable = true;
-                  name = "tokyonight";
-                  style = "night";
-              };
-
-              binds = {
-                  whichKey.enable = true;
-              };
-              
-              languages = {
-                  #enableLSP = true;
-                  enableTreesitter = true;
-      
-                  nix.enable = true;
-                  java.enable = true;
-                  rust.enable = true;
-                  ts.enable = true;
-                  json.enable = true;
-              };
-
-              lsp = {
-                enable = true;
-                trouble.enable = true;
-              };  
-
-              statusline.lualine.enable = true;
-              telescope.enable = true;
-              lazy.enable = true;
-              ui.noice.enable = true;
-              diagnostics.nvim-lint.enable = true;
-              notes.todo-comments.enable = true;
-
-              dashboard.startify.sessionPersistence = true;
-
-              autocomplete.blink-cmp = {
-                enable = true;
-                friendly-snippets.enable = true;
-              };
-
-              filetree.neo-tree.enable = true;
-
-              mini = {
-                  ai.enable = true;
-                  icons.enable = true;
-                  pairs.enable = true;
-              };
-
-              tabline.nvimBufferline.enable = true;
-
-              utility.motion.flash-nvim.enable = true;
-    
-              clipboard = {
-                  enable = true;
-                  providers.wl-copy.enable = true;
-              };
+        vim = {
+          theme = {
+            enable = true;
+            name = "tokyonight";
+            style = "night";
           };
+
+          binds = {
+            whichKey.enable = true;
+          };
+          
+          languages = {
+            #enableLSP = true;
+            enableTreesitter = true;
+
+            nix.enable = true;
+            java.enable = true;
+            rust.enable = true;
+            ts.enable = true;
+            json.enable = true;
+          };
+
+          lsp = {
+            enable = true;
+            trouble.enable = true;
+          };  
+
+          statusline.lualine.enable = true;
+          telescope.enable = true;
+          lazy.enable = true;
+          ui.noice.enable = true;
+          diagnostics.nvim-lint.enable = true;
+          notes.todo-comments.enable = true;
+
+          dashboard.startify.sessionPersistence = true;
+
+          autocomplete.blink-cmp = {
+            enable = true;
+            friendly-snippets.enable = true;
+          };
+
+          filetree.neo-tree.enable = true;
+
+          mini = {
+            ai.enable = true;
+            icons.enable = true;
+            pairs.enable = true;
+          };
+
+          tabline.nvimBufferline.enable = true;
+
+          utility.motion.flash-nvim.enable = true;
+
+          clipboard = {
+            enable = true;
+            providers.wl-copy.enable = true;
+          };
+        };
       };
+    };
   };
 
   nixpkgs.config = {
     allowUnfree = true;
   };
-
-  services.ratbagd.enable = true;
-
-  services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  networking.firewall.enable = true;
-  networking.firewall.allowPing = true;
-  networking.firewall.extraCommands = ''iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns'';
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
