@@ -5,13 +5,12 @@
 { config, lib, inputs, pkgs, ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      #inputs.nix-gaming.nixosModules.steamCompat
-      inputs.nix-gaming.nixosModules.platformOptimizations
-      inputs.nix-gaming.nixosModules.wine
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    #inputs.nix-gaming.nixosModules.steamCompat
+    inputs.nix-gaming.nixosModules.platformOptimizations
+    inputs.nix-gaming.nixosModules.wine
+  ];
 
   hardware = {
     bluetooth.enable = true;
