@@ -364,6 +364,14 @@
             enable = true;
             providers.wl-copy.enable = true;
           };
+
+          options = {
+            clipboard = lib.mkForce "unnamedplus";
+          };
+
+          extraPackages = with pkgs; [
+            wl-clipboard
+          ];
         };
       };
     };

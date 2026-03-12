@@ -18,6 +18,7 @@
         wl-clipboard
         hyprsome
         pavucontrol
+        rustdesk-flutter
     ];
 
     wayland.windowManager.hyprland = {
@@ -96,7 +97,7 @@
 
                 # Steam
                 "tile 1,  match:initial_class ^([Ss]team)$"
-                "float 1, match:initial_class ^([Ss]team)$, match:title ^(Steam - Self Updater|Steam Settings|Friends List)$"
+                "float 1, match:initial_class ^([Ss]team)$, match:title ^(Steam - Self Updater|Steam Settings|Friends List|menu)$"
                 "center 1, match:initial_class ^([Ss]team)$, match:title ^(Steam - Self Updater|Steam Settings|Friends List)$"
                 "max_size 600 1080, match:initial_class ^([Ss]team)$, match:title ^(Friends List)$"
 
