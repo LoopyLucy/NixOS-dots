@@ -87,13 +87,22 @@
                 #"center 1, match:float 1" #This was an extremely bad idea!
 
                 #Tags
-                "tag +games, match:class ^([Hh]ytale[Cc]lient)"
+                "tag +games, match:class ^([Hh]ytale[Cc]lient|org-prismlauncher-EntryPoint)"
                 "tag +media, match:class ^(vlc|com.stremio.stremio)"
 
                 #Overrides
                 "opacity 1.0 override, match:tag games*"
                 "opacity 1.0 override, match:tag media*"
                 "opacity 1.0 override, match:class ^(zen-beta)"
+
+                #Monitors
+                #"monitor 1, match:tag games*"
+
+                #Tiled
+                #"tile 1, match:tag games*"
+
+                #Fullscreen
+                #"fullscreen 1, match:tag games*"
 
                 # Steam
                 "tile 1,  match:initial_class ^([Ss]team)$"

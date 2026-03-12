@@ -58,7 +58,8 @@
         #inputs.nix-citizen.packages.${stdenv.hostPlatform.system}.star-citizen-git
         inputs.nix-citizen.packages.${stdenv.hostPlatform.system}.star-citizen-umu
         xivlauncher
-        modrinth-app
+        #modrinth-app
+        prismlauncher
 
         #Game Tools / Launchers
         heroic-unwrapped
@@ -159,6 +160,7 @@
     programs.yazi = {
         enable = true;
         enableZshIntegration = true;
+        shellWrapperName = "y";
         settings.opener.edit = [{
             run = "nvim \"$@\"";
             block = true;
