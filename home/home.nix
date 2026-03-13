@@ -59,7 +59,7 @@
         inputs.nix-citizen.packages.${stdenv.hostPlatform.system}.star-citizen-umu
         xivlauncher
         #modrinth-app
-        prismlauncher
+        #prismlauncher
 
         #Game Tools / Launchers
         heroic-unwrapped

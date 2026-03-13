@@ -195,6 +195,13 @@
 
     systemPackages = with pkgs; [
       pkgs.cifs-utils
+      (pkgs.prismlauncher.override {
+        jdks = [
+          pkgs.temurin-bin-21
+          pkgs.temurin-bin-17
+          pkgs.temurin-bin-8
+        ];
+      })
       samba
       libratbag
       v4l-utils

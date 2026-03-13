@@ -96,13 +96,13 @@
                 "opacity 1.0 override, match:class ^(zen-beta)"
 
                 #Monitors
-                #"monitor 1, match:tag games*"
+                "monitor 1, match:tag games*"
 
                 #Tiled
-                #"tile 1, match:tag games*"
+                "tile 1, match:tag games*"
 
                 #Fullscreen
-                #"fullscreen 1, match:tag games*"
+                "fullscreen 1, match:tag games*"
 
                 # Steam
                 "tile 1,  match:initial_class ^([Ss]team)$"
