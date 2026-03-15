@@ -1,4 +1,4 @@
-{ config, services, inputs, pkgs, split-monitor-workspaces, ... }:
+{ inputs, pkgs, ... }:
 
 {
 
@@ -126,7 +126,7 @@
             la = "ls -a";
             ff = "fastfetch";
             c = "clear";
-            f = "yy";
+            f = "y";
 
             buildhome = "nh home switch ~/.nixos";
             buildnix = "nh os switch ~/.nixos";

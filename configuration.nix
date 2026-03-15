@@ -328,7 +328,7 @@
           languages = {
             #enableLSP = true;
             enableTreesitter = true;
-
+            enableExtraDiagnostics = true;
             nix.enable = true;
             java.enable = true;
             rust.enable = true;
