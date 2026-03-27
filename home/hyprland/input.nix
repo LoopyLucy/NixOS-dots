@@ -24,6 +24,9 @@
                 # System     
                 "CTRL ALT, Delete,                exec, hyprctl dispatch exit 0"
                 "$mainMod SHIFT, R,               exec, pkill waybar || waybar"
+
+                # Background
+                "$mainMod, R,                     exec, bash ~/.config/hypr/scripts/RandBackground.sh"
                      
                 # Window Control     
                 "$mainMod,       Q,               killactive,"
