@@ -270,10 +270,10 @@
       libGL
       libpulseaudio
       stdenv.cc.cc
-      xorg.libX11
-      xorg.libXcursor
-      xorg.libXrandr
-      xorg.libXinerama
+      libX11
+      libXcursor
+      libXrandr
+      libXinerama
       # Wayland support
       glfw3-minecraft 
       libdecor
