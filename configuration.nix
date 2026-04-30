@@ -82,12 +82,18 @@
   services = {
     desktopManager.plasma6.enable = true;
 
-    blueman.enable = true;
     pulseaudio.enable = false;
     flatpak.enable = true;
     ratbagd.enable = true;
     openssh.enable = true;
     tumbler.enable = true;
+
+    tailscale.enable = true;
+
+    blueman = {
+      enable = true;
+      withApplet = true;
+    };
 
     displayManager = {
       autoLogin.enable = true;
@@ -202,6 +208,11 @@
           pkgs.temurin-bin-8
         ];
       })
+      zenity
+      vulkan-loader
+      libX11
+      libXcursor
+      libXrandr
       samba
       libratbag
       v4l-utils
@@ -256,6 +267,16 @@
     nix-ld.enable = true;
     nix-ld.libraries = with pkgs; [
       temurin-bin-21
+      libGL
+      libpulseaudio
+      stdenv.cc.cc
+      xorg.libX11
+      xorg.libXcursor
+      xorg.libXrandr
+      xorg.libXinerama
+      # Wayland support
+      glfw3-minecraft 
+      libdecor
     ];
 
     alvr = { 
@@ -332,7 +353,7 @@
             nix.enable = true;
             java.enable = true;
             rust.enable = true;
-            ts.enable = true;
+            typescript.enable = true;
             json.enable = true;
           };
 
@@ -387,6 +408,16 @@
   nixpkgs.config = {
     allowUnfree = true;
   };
+
+  # In your home-manager or nixos configuration
+  nixpkgs.overlays = [
+    (final: prev: {
+      openldap = prev.openldap.overrideAttrs (oldAttrs: {
+        doCheck = false;
+      });
+    })
+  ];
+
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

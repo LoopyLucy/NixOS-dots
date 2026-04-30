@@ -36,7 +36,7 @@
         inputs.zen-browser.packages."${stdenv.hostPlatform.system}".default
         bitwarden-desktop
         logiops
-        (bottles.override {removeWarningPopup = true;})
+        #(bottles.override {removeWarningPopup = true;})
         kdePackages.qtwebengine
         calibre
         obs-studio
@@ -50,6 +50,7 @@
         krita
         krita-plugin-gmic
         deluge
+        audacity
 
 
         #Games

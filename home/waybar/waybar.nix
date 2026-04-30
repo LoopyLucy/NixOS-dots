@@ -16,7 +16,7 @@
         blueman
     ];
 
-    services.blueman-applet.enable = true;
+    #services.blueman-applet.enable = true;
 
     programs.waybar = {
         enable = true;
