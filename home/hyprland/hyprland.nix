@@ -19,6 +19,7 @@
         hyprsome
         pavucontrol
         rustdesk-flutter
+        pixelorama
     ];
 
     wayland.windowManager.hyprland = {
@@ -87,7 +88,7 @@
                 #"center 1, match:float 1" #This was an extremely bad idea!
 
                 #Tags
-                "tag +games, match:class ^([Hh]ytale[Cc]lient|org-prismlauncher-EntryPoint)"
+                "tag +games, match:class ^([Hh]ytale[Cc]lient|org-prismlauncher-EntryPoint|.*Minecraft.*)"
                 "tag +media, match:class ^(vlc|com.stremio.stremio)"
 
                 #Overrides

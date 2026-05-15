@@ -16,39 +16,84 @@
         blueman
     ];
 
+    xdg.configFile."waybar/inverse-corner-left.svg".source = ./inverse-corner-left.svg;
+    xdg.configFile."waybar/inverse-corner-right.svg".source = ./inverse-corner-right.svg;
+
     #services.blueman-applet.enable = true;
 
     programs.waybar = {
         enable = true;
         style = ./style.css;
 
+    #    settings = {
+    #        main = {
+    #            layer = "top";
+    #            position = "top";
+    #            width = 1070;
+    #            margin-left = 200;
+    #            margin-right = 200;
+    #            margin-top = 8;
+    #
+    #            modules-left = [
+    #                "clock"
+    #                "custom/weather"
+    #                "temperature"
+    #                "cpu"
+    #            ];
+    #
+    #            modules-center = [
+    #                "hyprland/workspaces"
+    #            ];
+    #
+    #            modules-right = [
+    #                "tray"
+    #                "mpris"
+    #                "pulseaudio"
+    #                "battery"
+    #                "custom/power"
+    #                "custom/swaync"
+    #            ];
+    #        };
+    #    };
+
         settings = {
             main = {
                 layer = "top";
                 position = "top";
                 width = 1070;
-                margin-left = 200;
-                margin-right = 200;
-                margin-top = 8;
+                height = 35;
+                margin-top = 0;
 
-                modules-left = [
-                    "clock"
-                    "custom/weather"
-                    "temperature"
-                    "cpu"
-                ];
+                "group/left" = {
+                    orientation = "inherit";
+                    modules = [
+                        "clock"
+                        "custom/weather"
+                        "temperature"
+                        "cpu"
+                    ];
+                };
+
+                "group/right" = {
+                    orientation = "inherit";
+                    modules = [
+                        "tray"
+                        "mpris"
+                        "pulseaudio"
+                        "battery"
+                        "custom/power"
+                        "custom/swaync"
+                    ];
+                };
 
                 modules-center = [
+                    "custom/side_left"
+                    "group/left"
+                    "custom/spacer"
                     "hyprland/workspaces"
-                ];
-
-                modules-right = [
-                    "tray"
-                    "mpris"
-                    "pulseaudio"
-                    "battery"
-                    "custom/power"
-                    "custom/swaync"
+                    "custom/spacer"
+                    "group/right"
+                    "custom/side_right"
                 ];
             };
         };

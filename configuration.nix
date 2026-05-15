@@ -52,15 +52,20 @@
     hostName = "erin-desktop";
     networkmanager.enable = true;
 
+    nat.enable = true;
+    nftables.enable = true;
+
     firewall = {
       enable = true;
       allowPing = true;
-      extraCommands = ''iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns'';
+      checkReversePath = "loose";
+      allowedTCPPorts = [ 53 ];
+      allowedUDPPorts = [ 53 67 68 ];
+      # extraCommands = ''iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns'';
       # Open ports in the firewall.
-      #allowedTCPPorts = [ ... ];
-      #allowedUDPPorts = [ ... ];
     };
   };
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   time.timeZone = "Europe/London";
 
@@ -88,7 +93,7 @@
     openssh.enable = true;
     tumbler.enable = true;
 
-    tailscale.enable = true;
+    tailscale.enable = false;
 
     blueman = {
       enable = true;
@@ -166,6 +171,9 @@
       };
     };
 
+    dnsmasq.enable = true;
+    resolved.enable = false;
+
     printing = {
       enable = true;
       drivers = with pkgs; [
@@ -224,6 +232,8 @@
       temurin-bin-21
       xrandr
       socat
+      nftables
+      dnsmasq
     ];
 
     shells = with pkgs; [ 

@@ -27,6 +27,18 @@
             };
         };
 
+        "custom/side_left" = {
+            format = " ";
+        };
+
+        "custom/spacer" = {
+            format = "                       ";
+        };
+
+        "custom/side_right" = {
+            format = "    ";
+        };
+
         "custom/power" = {
             format = " ⏻ ";
             on-click = "wlogout -b 5";
@@ -54,6 +66,27 @@
             on-click = "sleep 0.1 && swaync-client -t -sw";
             on-click-right = "swaync-client -d -sw";
             escape = true;
+        };
+
+        "clock" = {
+            interval = 1;
+            format = " {:%H:%M}";
+            #format-alt = " {:%H:%M  %Y, %d %B, %A}";
+            format-alt = " {:%H:%M  %A, %d %B, %Y}";
+            tooltip-format = "<tt><small>{calendar}</small></tt>";
+            calendar = {
+                mode = "year";
+                mode-mon-col = 3;
+                week-pos = "right";
+                on-scroll = 1;
+                format = {
+                    months = "<span color='#ffead3'><b>{}</b></span>";
+                    days = "<span color='#ecc6d9'><b>{}</b></span>";
+                    weeks = "<span color='#99ffdd'><b>W{:%V}</b></span>";
+                    weekdays = "<span color='#ffcc66'><b>{}</b></span>";
+                    today = "<span color='#ff6699'><b><u>{}</u></b></span>";
+                };
+            };
         };
 
         "temperature" = {
