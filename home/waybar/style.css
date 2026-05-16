@@ -40,6 +40,12 @@ window#waybar {
 
 }
 
+#center {
+    background-color: rgba(0,0,0,1);
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
 #right {
     background-color: rgba(0,0,0,1);
     transition-property: background-color;
@@ -55,7 +61,7 @@ window#waybar {
 }
 
 #custom-side_left {
-    background: url("${./inverse-corner-left.svg}");
+    background: url('inverse-corner-left.svg');
     background-size: 100% 50%;
     background-position: top;
     background-repeat: no-repeat;
@@ -67,7 +73,7 @@ window#waybar {
 }
 
 #custom-side_right {
-    background: url("${./inverse-corner-right.svg}");
+    background: url('inverse-corner-right.svg');
     background-size: 100% 50%;
     background-position: top;
     background-repeat: no-repeat;
@@ -145,6 +151,12 @@ tooltip {
 
 #workspaces button.urgent {
     background-color: #eb4d4b;
+}
+
+#worspaces {
+    background-color: rgba(0,0,0,1);
+    transition-property: background-color;
+    transition-duration: .5s;
 }
 
 #mode {

@@ -74,6 +74,13 @@
                     ];
                 };
 
+                "group/center" = {
+                    orientation = "inherit";
+                    modules = [
+                        "hyprland/workspaces"
+                    ];
+                };
+
                 "group/right" = {
                     orientation = "inherit";
                     modules = [
@@ -90,7 +97,7 @@
                     "custom/side_left"
                     "group/left"
                     "custom/spacer"
-                    "hyprland/workspaces"
+                    "group/center"
                     "custom/spacer"
                     "group/right"
                     "custom/side_right"

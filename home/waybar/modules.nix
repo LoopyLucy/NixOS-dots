@@ -32,7 +32,7 @@
         };
 
         "custom/spacer" = {
-            format = "                       ";
+            format = "      ";
         };
 
         "custom/side_right" = {
@@ -130,10 +130,10 @@
                 ];
             };
             scroll-step = 5.0;
-            on-click = "../scripts/Volume.sh --toggle";
+            on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
             on-click-right = "pavucontrol -t 3";
-            on-scroll-up = "../scripts/Volume.sh --inc";
-            on-scroll-down = "../scripts/Volume.sh --dec";
+            on-scroll-up = "wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+";
+            on-scroll-down = "wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-";
             tooltip-format = "{icon} {desc} | {volume}%";
             smooth-scrolling-threshold = 1;
         };
