@@ -90,6 +90,8 @@
         nerd-fonts.jetbrains-mono
     ];
 
+    gtk.gtk4.theme = null;
+
     programs.nix-your-shell.enable = true;
     programs.fastfetch.enable = true;
     programs.vesktop.enable = true;
