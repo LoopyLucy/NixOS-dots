@@ -1,15 +1,43 @@
-{ inputs, pkgs, fetchurl, lib, ... }:
+{ lib, ... }:
 
-{
-    wayland.windowManager.hyprland = {
+let
+    inherit ( import ./lua_utils.nix { inherit lib; })
+        luaify lambda call bind_flags bind bind_exec with_flags on_startup;
+in {
+    wayland.windowManager.hyprland.settings = {
+        input = {
+            kb_layout = "gb";
+            numlock_by_default = true;
+
+            kb_options = caps:super;
+        };
+
+        bind = map call (builtins.concatLists [[
+                    /* Software */
+                    (bind_exec "SUPER + F" "thunar") /* Thunar */
+                    (bind_exec "SUPER + T" "kitty") /* Kitty */
+                    (bind_exec "SUPER + B" "zen-beta") /* Zen Browser */
+                    (bind_exec "Print" "grimblast copy area") /* Screenshot */
+
+                    /* System */
+                    (bind "CONTROL + ALT + delete" "hl.dsp.exit()") /* Exit Hyprland */
+                    (bind_exec "SUPER + SHIFT + R" "pkill waybar || waybar") /* Toggle Waybar */
+
+
+                    /* Window Control */
+                    (bind "SUPER + Q" "hl.dsp.window.close()") /*Close Window*/
+                    (bind "SUPER + SHIFT + F" "hl.dsp.window.maximise()") /* Pseudo Fullscreen */
+                    (bind "SUPER + ALT + F" "hl.dsp.window.fullscreen()") /* Fullscreen */
+                    (bind_exec "SUPER" "") /*  */
+
+                    /* Background */
+                    (bind_exec "SUPER + SHIFT + R" "bash ~/.config/hypr/scripts/RandBackground.sh")
+                ]   
+            ]
+        );
+    };
+    /* wayland.windowManager.hyprland = {
         settings = {
-
-            input = {
-                kb_layout = "gb";
-                numlock_by_default = true;
-
-                kb_options = caps:super;
-            };
 
             "$mainMod" = "SUPER";
 
@@ -94,5 +122,5 @@
                 ", XF86AudioPrev, exec, playerctl previous"
             ];
         };
-    };
+    }; */
 }

@@ -52,7 +52,7 @@
         deluge
         audacity
         qalculate-qt
-
+        pixelorama
 
         #Games
         #inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.star-citizen
