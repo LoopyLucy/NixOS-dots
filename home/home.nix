@@ -51,6 +51,7 @@
         krita-plugin-gmic
         deluge
         audacity
+        qalculate-qt
 
 
         #Games
