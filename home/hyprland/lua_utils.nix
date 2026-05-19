@@ -8,6 +8,8 @@ rec {
   bind = keys: dispatcher: bind_flags keys dispatcher {};
   bind_exec = keys: cmd: bind keys (''hl.dsp.exec_cmd("${cmd}")'');
 
+  smw = disp: _args: (''function() hl.plugin.split_monitor_workspaces.${disp}("${_args}") end'');
+
   merge_flags = flags: bind:
     let
       start = lib.lists.sublist 0 2 bind;

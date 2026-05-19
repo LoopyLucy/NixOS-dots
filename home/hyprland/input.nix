@@ -2,14 +2,14 @@
 
 let
     inherit ( import ./lua_utils.nix { inherit lib; })
-        luaify lambda call bind_flags bind bind_exec with_flags on_startup;
+        luaify lambda call bind_flags bind bind_exec smw with_flags on_startup;
 in {
     wayland.windowManager.hyprland.settings = {
-        input = {
+        config.input = {
             kb_layout = "gb";
             numlock_by_default = true;
 
-            kb_options = caps:super;
+            kb_options = "caps:super";
         };
 
         bind = map call (builtins.concatLists [[
@@ -26,101 +26,77 @@ in {
 
                     /* Window Control */
                     (bind "SUPER + Q" "hl.dsp.window.close()") /*Close Window*/
-                    (bind "SUPER + SHIFT + F" "hl.dsp.window.maximise()") /* Pseudo Fullscreen */
+                    (bind "SUPER + SHIFT + F" "hl.dsp.window.fullscreen({ mode = 'maximized', action = 'toggle'})") /* Pseudo Fullscreen */
                     (bind "SUPER + ALT + F" "hl.dsp.window.fullscreen()") /* Fullscreen */
-                    (bind_exec "SUPER" "") /*  */
+                    (bind "SUPER + SHIFT + SPACE" "hl.dsp.window.float()") /* Toggle Floating */
+                    (bind "SUPER + O" "hl.dsp.window.set_prop({ prop = 'opaque', value = 'toggle'})") /* Toggle Opacity */
+
+                    (bind "SUPER + SHIFT + D" (smw "move_to_workspace" "+1"))
+                    (bind "SUPER + SHIFT + A" (smw "move_to_workspace" "-1"))
+                    (bind "SUPER + SHIFT + right" (smw "move_to_workspace" "+1"))
+                    (bind "SUPER + SHIFT + left" (smw "move_to_workspace" "-1"))
+                    (bind "SUPER + SHIFT + mouse_up" (smw "move_to_workspace" "+1"))
+                    (bind "SUPER + SHIFT + mouse_down" (smw "move_to_workspace" "-1"))
+                    (bind "SUPER + SHIFT + mouse_right" (smw "move_to_workspace" "+1"))
+                    (bind "SUPER + SHIFT + mouse_left" (smw "move_to_workspace" "-1"))
+
+                    (bind "SUPER + D" (smw "cycle_workspaces" "+1"))
+                    (bind "SUPER + A" (smw "cycle_workspaces" "-1"))
+                    (bind "SUPER + right" (smw "cycle_workspaces" "+1"))
+                    (bind "SUPER + left" (smw "cycle_workspaces" "-1"))
+                    (bind "SUPER + mouse_up" (smw "cycle_workspaces" "+1"))
+                    (bind "SUPER + mouse_down" (smw "cycle_workspaces" "-1"))
+                    (bind "SUPER + mouse_right" (smw "cycle_workspaces" "+1"))
+                    (bind "SUPER + mouse_left" (smw "cycle_workspaces" "-1"))
+
+                    (bind "SUPER + ALT + D" (smw "change_monitor" " +1"))
+                    (bind "SUPER + ALT + A" (smw "change_monitor" "-1"))
+                    (bind "SUPER + ALT + right" (smw "change_monitor" "+1"))
+                    (bind "SUPER + ALT + left" (smw "change_monitor" "-1"))
+                    (bind "SUPER + ALT + mouse_up" (smw "change_monitor" "+1"))
+                    (bind "SUPER + ALT + mouse_down" (smw "change_monitor" "-1"))
+                    (bind "SUPER + ALT + mouse_right" (smw "change_monitor" "+1"))
+                    (bind "SUPER + ALT + mouse_left" (smw "change_monitor" "-1"))
 
                     /* Background */
-                    (bind_exec "SUPER + SHIFT + R" "bash ~/.config/hypr/scripts/RandBackground.sh")
+                    (bind_exec "SUPER + R" "bash ~/.config/hypr/scripts/RandBackground.sh")
                 ]   
+                (with_flags { mouse = true; } [
+                    (bind "SUPER + mouse:272" "hl.dsp.window.drag()")
+                    (bind "SUPER + mouse:273" "hl.dsp.window.resize()")
+                ])
+
+                (with_flags { locked = true; } [
+                    (bind_exec "XF86AudioNext"  "playerctl next")
+                    (bind_exec "XF86AudioPause" "playerctl play-pause")
+                    (bind_exec "XF86AudioPlay"  "playerctl play-pause")
+                    (bind_exec "XF86AudioPrev"  "playerctl previous")
+                    (bind_exec "Menu + right"  "playerctl next")
+                    (bind_exec "Menu + left"  "playerctl previous")
+                    (bind_exec "Menu + SPACE" "playerctl play-pause")
+                ])
+
+                (with_flags { repeating = true; locked = true; } [
+                    (bind_exec "XF86AudioRaiseVolume"  "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+")
+                    (bind_exec "XF86AudioLowerVolume"  "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-")
+                    (bind_exec "XF86AudioMute"         "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle")
+                    (bind_exec "XF86AudioMicMute"      "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle")
+                ])
+
+                (
+                    # workspaces
+                    # binds $mainMod + [shift +] {1..9} to [move to] workspace {1..9}
+                    builtins.concatLists (builtins.genList (i:
+                        let ws = i + 1;
+                        in [
+                            #"$mainMod, code:1${toString i}, split-workspace, ${toString ws}"
+                            #"$mainMod SHIFT, code:1${toString i}, split-movetoworkspace, ${toString ws}"
+                            (bind "SUPER + ${toString ws}" (smw "workspace" "${toString ws}"))
+                            (bind "SUPER + SHIFT + ${toString ws}" (smw "move_to_workspace" "${toString ws}"))
+                        ]
+                    )9)
+                )
             ]
         );
     };
-    /* wayland.windowManager.hyprland = {
-        settings = {
-
-            "$mainMod" = "SUPER";
-
-            bind = [
-                # USER (Software)
-                "$mainMod, F,                     exec, thunar"            
-                "$mainMod, B,                     exec, zen-beta"
-                "$mainMod, T,                     exec, kitty"
-                "$mainMod, K,                     exec, konsole"
-                ",         Print,                 exec, grimblast copy area"
-                     
-                # System     
-                "CTRL ALT, Delete,                exec, hyprctl dispatch exit 0"
-                "$mainMod SHIFT, R,               exec, pkill waybar || waybar"
-
-                # Background
-                "$mainMod, R,                     exec, bash ~/.config/hypr/scripts/RandBackground.sh"
-                     
-                # Window Control     
-                "$mainMod,       Q,               killactive,"
-                "$mainMod SHIFT, F,               fullscreen, 1"
-                "$mainMod ALT,   F,                fullscreen"
-                "$mainMod SHIFT, SPACE,           togglefloating"
-                "$mainMod,       O,               setprop, active opaque toggle"
-                "$mainMod SHIFT, D,               split-movetoworkspace, +1"
-                "$mainMod SHIFT, A,               split-movetoworkspace, -1"
-                "$mainMod SHIFT, left,            split-movetoworkspace, +1"
-                "$mainMod SHIFT, right,           split-movetoworkspace, -1"
-                "$mainMod SHIFT, mouse_up,        split-movetoworkspace, +1"
-                "$mainMod SHIFT, mouse_down,      split-movetoworkspace, -1"
-                "$mainMod SHIFT, mouse_right,     split-movetoworkspace, +1"
-                "$mainMod SHIFT, mouse_left,      split-movetoworkspace, -1"
-                     
-                # Workspaces     
-                "$mainMod, right,                 split-workspace, +1"
-                "$mainMod, left,                  split-workspace, -1"
-                "$mainMod, D,                     split-workspace, +1"
-                "$mainMod, A,                     split-workspace, -1"
-                "$mainMod, mouse_up,              split-workspace, +1"
-                "$mainMod, mouse_down,            split-workspace, -1"
-                "$mainMod, mouse_right,           split-workspace, +1"
-                "$mainMod, mouse_left,            split-workspace, -1"
-     
-                # Monitors     
-                "$mainMod ALT, right,             split-changemonitor, next"
-                "$mainMod ALT, left,              split-changemonitor, prev"
-                "$mainMod ALT, D,                 split-changemonitor, next"
-                "$mainMod ALT, A,                 split-changemonitor, prev"
-                "$mainMod ALT, mouse_up,          split-changemonitor, next"
-                "$mainMod ALT, mouse_down,        split-changemonitor, prev"
-                "$mainMod ALT, mouse_right,       split-changemonitor, next"
-                "$mainMod ALT, mouse_left,        split-changemonitor, prev"
-            ]
-            ++ (
-                # workspaces
-                # binds $mainMod + [shift +] {1..9} to [move to] workspace {1..9}
-                builtins.concatLists (builtins.genList (i:
-                    let ws = i + 1;
-                    in [
-                        "$mainMod, code:1${toString i}, split-workspace, ${toString ws}"
-                        "$mainMod SHIFT, code:1${toString i}, split-movetoworkspace, ${toString ws}"
-                    ]
-                )9)
-
-            );
-
-            bindm = [
-                "$mainMod, mouse:272, movewindow" # NOTE: mouse:272 = left click
-                "$mainMod, mouse:273, resizewindow" # NOTE: mouse:273 = right click
-            ];
-
-            bindel = [
-                ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
-                ",XF86AudioLowerVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-"
-                ",       XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-            ];
-
-            bindl = [
-                ", XF86AudioPlay, exec, playerctl play-pause"
-                ",XF86AudioPause, exec, playerctl play-pause"
-                ", XF86AudioNext, exec, playerctl next"
-                ", XF86AudioPrev, exec, playerctl previous"
-            ];
-        };
-    }; */
 }

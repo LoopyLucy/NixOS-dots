@@ -12,18 +12,19 @@
             persistent-workspaces = { "*" = 1; };
             format = "{windows}";
             format-icons = {
-                active = " :";
-                default = " :";
+                active = " ";
+                default = " ";
+                empty = "";
             };
-            format-window-separator = " ";
-            window-rewrite-default = "";
+            format-window-separator = "";
+            window-rewrite-default = " ";
             window-rewrite = {
-                "class<kitty|konsole>" = "";
-                "class<.*zen.*>" = "󰰷";
-                "class<code|VSCode|code-url-handler|code-oss|codium|codium-url-handler|VSCodium>" = "";
-                "class<[Tt]hunderbird|[Tt]hunderbird-esr>" = "";
-                "class<[Dd]iscord|[Ww]ebcord|Vesktop>" = "";
-                "class<[Ss]team>" = "";
+                "class<kitty|konsole>" = " ";
+                "class<.*zen.*>" = "󰰷 ";
+                "class<code|VSCode|code-url-handler|code-oss|codium|codium-url-handler|VSCodium>" = " ";
+                "class<[Tt]hunderbird|[Tt]hunderbird-esr>" = " ";
+                "class<[Dd]iscord|[Ww]ebcord|Vesktop>" = " ";
+                "class<[Ss]team>" = " ";
             };
         };
 

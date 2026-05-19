@@ -1,6 +1,8 @@
-{ config, ... }:
+{ config, lib, ... }:
 
 let
+	inherit (import ../hyprland/lua_utils.nix { inherit lib; })
+        luaify lambda call bind_flags bind bind_exec with_flags on_startup;
     inherit (config.lib.formats.rasi) mkLiteral;
 in {
 
@@ -16,12 +18,11 @@ in {
     };
 
     wayland.windowManager.hyprland.settings = {
-		windowrule = [
-			"match:class ^Rofi$, stay_focused on, rounding 0"
+		window_rule = [
+			{ match.class = "^Rofi$"; stay_focused = true; rounding = 0; }
 		];
-		bindr = [
-			"$mainMod, $mainMod_L, exec, pkill rofi || rofi -show drun -modi drun,filebrowser,run,window" #single tap $mainMod key open rofi
-		];
+		bind = map call (builtins.concatLists [[
+			(bind_exec "SUPER + SUPER_L" "pkill rofi || rofi -show drun -modi drun,filebrowser,run,window")
+		]]);
     };
-
 }

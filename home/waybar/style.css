@@ -117,8 +117,8 @@ tooltip {
     color: #ffffff;
     box-shadow: none;
 	text-shadow: none;
-    padding: 4px;
-    border-radius: 9px;
+    padding: 0px;
+    border-radius: 0px;
     animation: gradient_f 20s ease-in infinite;
     transition: all 0.5s cubic-bezier(.55,-0.68,.48,1.682);
 }
@@ -137,8 +137,8 @@ tooltip {
 #workspaces button:hover {
     background: rgba(0, 0, 0, 0.2);
 	color: @accent3;
-    padding-left: 2px;
-    padding-right: 2px;
+    padding-left: 0px;
+    padding-right: 0px;
     animation: gradient_f 20s ease-in infinite;
     transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
 }

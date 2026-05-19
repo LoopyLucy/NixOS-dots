@@ -22,6 +22,7 @@ in {
         hyprsome
         pavucontrol
         rustdesk-flutter
+        playerctl
     ];
 
     wayland.windowManager.hyprland = {
@@ -86,7 +87,7 @@ in {
             monitor = [
                 { output = "DP-1"; mode = "preferred"; position = "auto-left"; scale = 1; }
                 { output = "DP-2"; mode = "preferred"; position = "0x0"; scale = 1; }
-                { output = "DP-1"; mode = "preferred"; position = "auto-right"; scale = 1; }
+                { output = "HDMI-A-1"; mode = "preferred"; position = "auto-right"; scale = 1; }
             ];
 
             window_rule = [
@@ -97,18 +98,8 @@ in {
                 /* Overrides */
                 { match = { tag = "^(games*|media*)"; class = "^(zen-beta)"; }; opacity = "1.0 override"; }
 
-                /* Monitor Forcing */
-                { match.tag = "games*"; monitor = "DP-2"; }
-
-                /* Force Tiled */
-                { match.tag = "games*"; tile = true; }
-
-                /* Force Fullscreen */
-                { match.tag = "games*"; fullscreen = true; }
-
                 /* Force Floating */
-                { match = { class = "([Tt]hunar)"; title = "negative:(.*[Tt]hunar.*)"; }; float = true;}
-                { match.title = "negative:(.*[Tt]hunar.*)"; float = true; }
+                { match = { class = "^([Tt]hunar)"; title = "negative:(.*[Tt]hunar.*)"; }; float = true;}
 
                 /* Centering */
                 { match.title = "^(Picture-in-Picture)$"; float = true; }
