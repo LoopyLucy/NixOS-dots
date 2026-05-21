@@ -138,5 +138,20 @@
             tooltip-format = "{icon} {desc} | {volume}%";
             smooth-scrolling-threshold = 1;
         };
+
+        "mpris" = {
+            format = "{player_icon} {dynamic}";
+            format-paused = "{status_icon}";
+            player-icons = {
+                default = "▶";
+                mpv = "🎵";
+            };
+            status-icons = {
+                paused = "⏸";
+            };
+            title-len = 8;
+            album-len = 0;
+            artist-len = 0;
+        };
     };
 }

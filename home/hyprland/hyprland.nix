@@ -1,7 +1,7 @@
 { inputs, pkgs, fetchurl, lib, config, ... }:
 
 let
-    inherit (import ./Lua_utils.nix { inherit lib; }) 
+    inherit (import ./lua_utils.nix { inherit lib; }) 
         luaify lambda call bind_flags bind bind_exec with_flags on_startup;
 in {
     imports = [
@@ -96,7 +96,8 @@ in {
                 { match.class = "^(vlc|com.stremio.stremio)"; tag = "+media"; }
 
                 /* Overrides */
-                { match = { tag = "^(games*|media*)"; class = "^(zen-beta)"; }; opacity = "1.0 override"; }
+                { match = { tag = "games*"; class = "^(.*zen.*)"; }; opaque = true; fullscreen_state = 2; }
+                { match = { tag = "media*"; }; opacity = "1.0 override"; fullscreen = true; }
 
                 /* Force Floating */
                 { match = { class = "^([Tt]hunar)"; title = "negative:(.*[Tt]hunar.*)"; }; float = true;}
