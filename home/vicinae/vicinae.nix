@@ -10,17 +10,30 @@ in {
         # Manage themes declaratively
         themes = {
             "my-custom-theme" = {
-                background = "#000000";
+                meta = {
+                    version = 1;
+                    name = "Custom theme";
+                    description = "My Theme";
+                    variant = "dark";
+                    inherits = "vicinae-dark";
+                };
+                background = "#111111";
                 accent = "#cba6f7";
-                # Add other supported theme properties here
+                colors = {
+                    core = {
+                        background = "#000000";
+                        foreground = "#ffffff";
+                    };
+                };
             };
         };
     };
 
     wayland.windowManager.hyprland.settings = {
 		window_rule = [
-			{ match.class = "^[Vv]icinae$"; stay_focused = true; rounding = 0; }
+			{ match.class = "^[Vv]icinae$"; stay_focused = true; rounding = 10; }
 		];
+
 		bind = map call (builtins.concatLists [[
 			(bind_exec "SUPER + SUPER_L" "xdg-open vicinae://toggle")
 		]]);

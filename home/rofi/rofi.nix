@@ -18,8 +18,8 @@ in {
 		window_rule = [
 			{ match.class = "^Rofi$"; stay_focused = true; rounding = 0; }
 		];
-		#bind = map call (builtins.concatLists [[
-		#	(bind_exec "SUPER + SUPER_L" "pkill rofi || rofi -show drun -modi drun,filebrowser,run,window")
-		#]]);
+		bind = map call (builtins.concatLists [[
+			(bind_exec "SUPER + SPACE" "pkill rofi || rofi -show drun -modi drun,filebrowser,run,window")
+		]]);
     };
 }
