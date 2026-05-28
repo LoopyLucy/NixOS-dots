@@ -100,7 +100,7 @@
             "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "writer.desktop";
             "inode/directory" = "thunar.desktop";
             "text/plain" = "code.desktop";
-            "image/*" = "imv";
+            "image/*" = "imv.desktop";
         };
     };
 
