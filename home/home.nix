@@ -34,6 +34,7 @@
     home.packages = with pkgs; [
         #Software
         inputs.zen-browser.packages."${stdenv.hostPlatform.system}".default
+        #brave
         bitwarden-desktop
         logiops
         #(bottles.override {removeWarningPopup = true;})

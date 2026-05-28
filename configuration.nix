@@ -234,6 +234,7 @@
       socat
       nftables
       dnsmasq
+      tree
     ];
 
     shells = with pkgs; [ 

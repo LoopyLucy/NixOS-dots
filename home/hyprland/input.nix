@@ -17,7 +17,9 @@ in {
                     (bind_exec "SUPER + F" "thunar") /* Thunar */
                     (bind_exec "SUPER + T" "kitty") /* Kitty */
                     (bind_exec "SUPER + B" "zen-beta") /* Zen Browser */
-                    (bind_exec "Print" "grimblast copy area") /* Screenshot */
+                    (bind_exec "Print" "grimblast copysave area --freeze") /* Screenshot */
+                    (bind_exec "SHIFT + Print" "grimblast copysave active") /* Screenshot Active Window */
+                    (bind_exec "SUPER + Print" "grimblast copysave screen") /* Screenshot Fullscreen */
 
                     /* System */
                     (bind "CONTROL + ALT + delete" "hl.dsp.exit()") /* Exit Hyprland */
@@ -73,7 +75,7 @@ in {
                     (bind_exec "XF86AudioPrev"  "playerctl previous")
                     (bind_exec "Menu + right"  "playerctl next")
                     (bind_exec "Menu + left"  "playerctl previous")
-                    (bind_exec "Menu + SPACE" "playerctl play-pause")
+                    (bind_exec "Menu + down" "playerctl play-pause")
                 ])
 
                 (with_flags { repeating = true; locked = true; } [
