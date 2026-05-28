@@ -17,9 +17,15 @@ in {
                     (bind_exec "SUPER + F" "thunar") /* Thunar */
                     (bind_exec "SUPER + T" "kitty") /* Kitty */
                     (bind_exec "SUPER + B" "zen-beta") /* Zen Browser */
-                    (bind_exec "Print" "grimblast copysave area --freeze") /* Screenshot */
-                    (bind_exec "SHIFT + Print" "grimblast copysave active") /* Screenshot Active Window */
-                    (bind_exec "SUPER + Print" "grimblast copysave screen") /* Screenshot Fullscreen */
+                    #(bind_exec "Print" "grimblast copysave area --freeze ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png") /* Screenshot */
+                    #(bind "Print" (lambda ''
+                    #    local h = io.popen('hyprctl activewindow | grep class:'):read('*a'):match('class:%s*(%S+)')
+                    #    local app = (h and h ~= "") and h:lower() or "desktop"
+                    #    local dir = os.getenv("HOME") .. "/Pictures/Screenshots/" .. app
+                    #    os.execute("(mkdir -p " .. dir .. " && grimblast copysave area --freeze " .. dir .. "/" .. os.date("%Y-%m-%d_%H-%M-%S") .. ".png) &")
+                    #''))
+                    #(bind_exec "SHIFT + Print" "grimblast copysave active") /* Screenshot Active Window */
+                    #(bind_exec "SUPER + Print" "grimblast copysave screen") /* Screenshot Fullscreen */
 
                     /* System */
                     (bind "CONTROL + ALT + delete" "hl.dsp.exit()") /* Exit Hyprland */

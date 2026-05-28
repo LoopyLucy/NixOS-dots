@@ -11,6 +11,7 @@ in {
 	    ../waybar/waybar.nix
 	    ../rofi/rofi.nix
         ../wlogout/wlogout.nix
+        ../screenshot/screenshot.nix
     ];
 
     xdg.configFile."hypr/scripts".source = ./scripts;
