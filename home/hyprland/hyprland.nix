@@ -10,6 +10,7 @@ in {
         ./hyprpaper.nix
 	    ../waybar/waybar.nix
 	    ../rofi/rofi.nix
+        ../vicinae/vicinae.nix
         ../wlogout/wlogout.nix
         ../screenshot/screenshot.nix
     ];
