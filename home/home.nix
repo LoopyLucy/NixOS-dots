@@ -79,6 +79,7 @@
         rar
         winetricks
         protontricks
+        imv
 
         #limo
         #steamtinkerlaunch
@@ -92,6 +93,16 @@
     ];
 
     gtk.gtk4.theme = null;
+
+    xdg.mimeApps = {
+        enable = true;
+        defaultApplications = {
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "writer.desktop";
+            "inode/directory" = "thunar.desktop";
+            "text/plain" = "code.desktop";
+            "image/*" = "imv";
+        };
+    };
 
     programs.nix-your-shell.enable = true;
     programs.fastfetch.enable = true;

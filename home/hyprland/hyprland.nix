@@ -18,7 +18,6 @@ in {
 
     home.packages = with pkgs; [
         hyprpicker
-        grimblast
         wl-clipboard
         hyprsome
         pavucontrol

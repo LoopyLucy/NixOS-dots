@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 
 let
-  inherit (import ../hypr/lua_utils.nix { inherit lib; })
+  inherit (import ../hyprland/lua_utils.nix { inherit lib; })
     call bind_exec;
 
   take-screenshot = pkgs.writeShellApplication {
@@ -12,7 +12,7 @@ let
 in {
   xdg.configFile."satty/config.toml".source = (pkgs.formats.toml {}).generate "config.toml" {
     general = {
-      corner-roundness = 0;
+      corner-roundness = 10;
       actions-on-enter = [ "save-to-clipboard" "save-to-file" "exit" ];
       actions-on-right-click = [ "exit" ];
       copy-command = "${pkgs.wl-clipboard}/bin/wl-copy";
@@ -25,7 +25,9 @@ in {
 
   wayland.windowManager.hyprland.settings = {
     bind = map call [
-      (bind_exec "print" "${take-screenshot}/bin/take-screenshot")
+      (bind_exec "print" "${take-screenshot}/bin/take-screenshot -r")
+      (bind_exec "ALT + print" "${take-screenshot}/bin/take-screenshot -f")
+      (bind_exec "SHIFT + print" "${take-screenshot}/bin/take-screenshot -w")
     ];
     layer_rule = [
       { match.namespace = "selection"; no_anim = true; }
