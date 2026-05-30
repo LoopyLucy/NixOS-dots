@@ -116,7 +116,6 @@
 
         blueman = {
             enable = true;
-            withApplet = true;
         };
 
         displayManager = {
