@@ -32,31 +32,31 @@
     };
 
     outputs = inputs@{ self, nixpkgs, home-manager, nvf, split-monitor-workspaces, zen-browser, nix-gaming, nix-citizen,... }:
-        let
-            inherit (self) outputs;
-            lib = nixpkgs.lib;
-            system = "x86_64-linux";
-            
-            pkgs = nixpkgs.legacyPackages.${system};
-        in {
-            nixosConfigurations = {
-                erin-desktop = lib.nixosSystem {
-                    inherit system;
-                    specialArgs = { inherit inputs outputs; };
-                    modules = [ 
-                        ./configuration.nix
-                        nvf.nixosModules.default 
-                    ];
-                };
-            };
-            homeConfigurations = {
-                erin = home-manager.lib.homeManagerConfiguration {
-                    inherit pkgs;
-                    extraSpecialArgs = { inherit inputs outputs; };
-                    modules = [ 
-                        ./home/home.nix
-                    ];
-                };
+    let
+        inherit (self) outputs;
+        lib = nixpkgs.lib;
+        system = "x86_64-linux";
+        
+        pkgs = nixpkgs.legacyPackages.${system};
+    in {
+        nixosConfigurations = {
+            erin-desktop = lib.nixosSystem {
+                inherit system;
+                specialArgs = { inherit inputs outputs; };
+                modules = [ 
+                    ./configuration.nix
+                    nvf.nixosModules.default 
+                ];
             };
         };
+        homeConfigurations = {
+            erin = home-manager.lib.homeManagerConfiguration {
+                inherit pkgs;
+                extraSpecialArgs = { inherit inputs outputs; };
+                modules = [ 
+                    ./home/home.nix
+                ];
+            };
+        };
+    };
 }
