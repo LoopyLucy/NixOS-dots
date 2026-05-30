@@ -302,7 +302,6 @@
     #];
 
     programs = {
-        hyprland.enable = true;
 
         xfconf.enable = true;
 
