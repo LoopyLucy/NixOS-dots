@@ -17,12 +17,13 @@ in {
                     variant = "dark";
                     inherits = "vicinae-dark";
                 };
-                background = "#111111";
-                accent = "#cba6f7";
                 colors = {
                     core = {
                         background = "#000000";
                         foreground = "#ffffff";
+                        secondary_background = "#21002c";
+                        border = "#000000";
+                        accent = "#d489fa";
                     };
                 };
             };

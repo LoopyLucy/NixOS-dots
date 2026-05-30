@@ -98,7 +98,8 @@
         enable = true;
         defaultApplications = {
             "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "writer.desktop";
-            "inode/directory" = "thunar.desktop";
+            "inode/directory" = ["thunar.desktop"];
+            "x-scheme-handler/file" = [ "thunar.desktop" ];
             "text/plain" = "code.desktop";
             "image/jpeg" = "imv.desktop";
             "image/png" = "imv.desktop";
@@ -170,6 +171,8 @@
         profiles.default.userSettings = {
             "editor.fontFamily" = "JetBrainsMono Nerd Font";
             "editor.fontLigatures" = true;
+            "editor.tabSize" = 4;
+            "editor.detectIndentation" = false;
             "terminal.integrated.fontLigatures.enabled" = true;
             "git.confirmSync" = false;
             "git.enableSmartCommit" = true;

@@ -29,7 +29,7 @@
         };
 
         "custom/side_left" = {
-            format = " ";
+            format = "  ";
         };
 
         "custom/spacer" = {
@@ -37,7 +37,7 @@
         };
 
         "custom/side_right" = {
-            format = "    ";
+            format = "  ";
         };
 
         "custom/power" = {
