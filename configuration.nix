@@ -223,9 +223,15 @@
     };
 
     environment = {
+        etc = {
+            "jdks/temurin-17".source = pkgs.temurin-bin-17;
+            "jdks/temurin-11".source = pkgs.temurin-bin-11;
+            "jdks/temurin-8".source = pkgs.temurin-bin-8;
+        };
         sessionVariables = {
             GTK_USE_PORTAL = "1";
             NIXOS_OZONE_WL = "1";
+            
             XDG_CURRENT_DESKTOP = "Hyprland";
             XDG_SESSION_DESKTOP = "Hyprland";
 
@@ -242,6 +248,7 @@
                 jdks = [
                     pkgs.temurin-bin-21
                     pkgs.temurin-bin-17
+                    pkgs.temurin-bin-11
                     pkgs.temurin-bin-8
                 ];
             })
@@ -259,6 +266,9 @@
             glib
             usbutils
             temurin-bin-21
+            temurin-bin-17
+            temurin-bin-11
+            temurin-bin-8
             xrandr
             socat
             nftables
@@ -308,13 +318,26 @@
         nix-ld.enable = true;
         nix-ld.libraries = with pkgs; [
             temurin-bin-21
+            temurin-bin-17
+            wayland
             libGL
+            glfw
+            openal
+            flite
             libpulseaudio
             stdenv.cc.cc
             libX11
+            libXext
             libXcursor
             libXrandr
+            libXxf86vm
+            libXi
+            libXrender
+            libXtst
             libXinerama
+            libxkbcommon
+            freetype
+            fontconfig
             # Wayland support
             glfw3-minecraft 
             libdecor

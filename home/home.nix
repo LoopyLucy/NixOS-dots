@@ -43,7 +43,14 @@
         obs-studio
         discord
         vencord
-        jetbrains.idea-oss #Intellij IDEA OSS
+        #jetbrains.idea-oss #Intellij IDEA OSS
+        (jetbrains.idea-oss.override {
+                jdks = [
+                    pkgs.temurin-bin-21
+                    pkgs.temurin-bin-17
+                    pkgs.temurin-bin-8
+                ];
+            })
         vlc
         blockbench
         android-studio
@@ -173,6 +180,8 @@
             "editor.fontLigatures" = true;
             "editor.tabSize" = 4;
             "editor.detectIndentation" = false;
+            "editor.formatOnSave" = true;
+            "editor.formatOnPaste" = true;
             "terminal.integrated.fontLigatures.enabled" = true;
             "git.confirmSync" = false;
             "git.enableSmartCommit" = true;
