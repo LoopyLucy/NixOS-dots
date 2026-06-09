@@ -28,7 +28,7 @@
         extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
         kernelModules = [ "v4l2loopback" "uinput" ];
         extraModprobeConfig = ''
-            options v4l2loopback video_nr=2,3 width=640,1920 max_width=1920 height=480,1080 max_height=1080 format=YU12,YU12 exclusive_caps=1,1 card_label=Phone,Laptop debug=1
+            options v4l2loopback video_nr=2,3 width=640,2560 max_width=2560 height=480,1440 max_height=1440 format=YU12,YU12 exclusive_caps=1,1 card_label=Phone,Laptop debug=1
         '';
     };
 
@@ -119,14 +119,22 @@
         };
 
         displayManager = {
-            autoLogin.enable = true;
+            autoLogin.enable = false;
             autoLogin.user = "erin";
             sessionPackages = [ inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland ];
             defaultSession = "hyprland";
-            sddm = {
-            enable = true;
-            wayland.enable = true;
-            };
+            ly = {
+                enable = true
+                settings = {
+                    blank = true;
+                    load = true;
+                    save = true;
+                }
+            }
+            /*sddm = {
+                enable = true;
+                wayland.enable = true;
+            };*/
         };
 
         xserver.xkb = {
@@ -184,8 +192,8 @@
             nssmdns4 = true;
             openFirewall = true;
             publish = {
-            enable = true;
-            userServices = true;
+                enable = true;
+                userServices = true;
             };
         };
 
@@ -227,6 +235,11 @@
             "jdks/temurin-17".source = pkgs.temurin-bin-17;
             "jdks/temurin-11".source = pkgs.temurin-bin-11;
             "jdks/temurin-8".source = pkgs.temurin-bin-8;
+
+            "xdg/xdg-terminal-exec/config.toml".text = ''
+                [[default]]
+                command = [ "kitty" ] # Replace with your terminal executable
+            '';
         };
         sessionVariables = {
             GTK_USE_PORTAL = "1";
@@ -367,7 +380,7 @@
 
         gamescope = {
             enable = true;
-            capSysNice = true;
+            capSysNice = false;
         };
 
         steam = {

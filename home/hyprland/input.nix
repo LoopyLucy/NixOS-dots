@@ -43,8 +43,8 @@ in {
                     (bind "SUPER + SHIFT + A" (smw "move_to_workspace" "-1"))
                     (bind "SUPER + SHIFT + right" (smw "move_to_workspace" "+1"))
                     (bind "SUPER + SHIFT + left" (smw "move_to_workspace" "-1"))
-                    (bind "SUPER + SHIFT + mouse_up" (smw "move_to_workspace" "+1"))
-                    (bind "SUPER + SHIFT + mouse_down" (smw "move_to_workspace" "-1"))
+                    (bind "SUPER + SHIFT + mouse_up" (smw "move_to_workspace" "-1"))
+                    (bind "SUPER + SHIFT + mouse_down" (smw "move_to_workspace" "+1"))
                     (bind "SUPER + SHIFT + mouse_right" (smw "move_to_workspace" "+1"))
                     (bind "SUPER + SHIFT + mouse_left" (smw "move_to_workspace" "-1"))
 
@@ -52,8 +52,8 @@ in {
                     (bind "SUPER + A" (smw "cycle_workspaces" "-1"))
                     (bind "SUPER + right" (smw "cycle_workspaces" "+1"))
                     (bind "SUPER + left" (smw "cycle_workspaces" "-1"))
-                    (bind "SUPER + mouse_up" (smw "cycle_workspaces" "+1"))
-                    (bind "SUPER + mouse_down" (smw "cycle_workspaces" "-1"))
+                    (bind "SUPER + mouse_up" (smw "cycle_workspaces" "-1"))
+                    (bind "SUPER + mouse_down" (smw "cycle_workspaces" "+1"))
                     (bind "SUPER + mouse_right" (smw "cycle_workspaces" "+1"))
                     (bind "SUPER + mouse_left" (smw "cycle_workspaces" "-1"))
 

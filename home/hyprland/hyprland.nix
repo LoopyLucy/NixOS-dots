@@ -8,8 +8,8 @@ in {
         ./startup-apps.nix
         ./input.nix
         ./hyprpaper.nix
-	    ../waybar/waybar.nix
-	    ../rofi/rofi.nix
+        ../waybar/waybar.nix
+        ../rofi/rofi.nix
         ../vicinae/vicinae.nix
         ../wlogout/wlogout.nix
         ../screenshot/screenshot.nix

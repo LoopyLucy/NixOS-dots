@@ -43,14 +43,7 @@
         obs-studio
         discord
         vencord
-        #jetbrains.idea-oss #Intellij IDEA OSS
-        (jetbrains.idea-oss.override {
-                jdks = [
-                    pkgs.temurin-bin-21
-                    pkgs.temurin-bin-17
-                    pkgs.temurin-bin-8
-                ];
-            })
+        jetbrains.idea-oss #Intellij IDEA OSS
         vlc
         blockbench
         android-studio
@@ -83,6 +76,7 @@
         btop
         unzip
         p7zip
+        peazip
         rar
         winetricks
         protontricks
