@@ -109,6 +109,19 @@
         };
     };
 
+    xdg.desktopEntries = {
+        "vesktop" = {
+            name = "Vesktop";
+            genericName = "Internet Messenger";
+            exec = "${pkgs.vesktop}/bin/vesktop --enable-features=UseOzonePlatform,VaapiVideoDecoder,VaapiVideoEncoder --ozone-platform=wayland";
+            icon = "vesktop";
+            type = "Application";
+            terminal = false;
+            categories = [ "Network" "InstantMessaging" "Chat" ];
+            comment = "Vesktop with native Wayland and VA-API flags enabled via Home Manager";
+        };
+    };
+
     programs.nix-your-shell.enable = true;
     programs.fastfetch.enable = true;
     programs.vesktop.enable = true;
@@ -202,6 +215,10 @@
             init.defaultBranch = "mistress";
         };
     };
+
+    nixpkgs.config.permittedInsecurePackages = [
+        "electron-39.8.10"
+    ]; #TEMP
 
     programs.home-manager.enable = true; #required
 }

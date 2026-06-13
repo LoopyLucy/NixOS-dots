@@ -12,7 +12,7 @@ in {
             hl.exec_cmd("xrandr --output <DP-2> --primary")
             hl.exec_cmd("hyprctl setcursor Bibata-Modern-Classic 24")
             hl.exec_cmd("vicinae server")
-            hl.exec_cmd("vesktop")
+            hl.exec_cmd("vesktop --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-features=vaapi")
         '';
         window_rule = [
             { match.class = "^(vesktop)$"; monitor = "DP-1"; }

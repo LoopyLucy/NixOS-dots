@@ -13,6 +13,12 @@
     ];
 
     hardware = {
+        graphics = {
+            enable = true;
+            extraPackages = with pkgs; [
+                rocmPackages.clr.icd
+            ];
+        };
         bluetooth.enable = true;
         steam-hardware.enable = true;
     };
@@ -119,18 +125,18 @@
         };
 
         displayManager = {
-            autoLogin.enable = false;
+            autoLogin.enable = true;
             autoLogin.user = "erin";
             sessionPackages = [ inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland ];
             defaultSession = "hyprland";
             ly = {
-                enable = true
+                enable = true;
                 settings = {
                     blank = true;
                     load = true;
                     save = true;
-                }
-            }
+                };
+            };
             /*sddm = {
                 enable = true;
                 wayland.enable = true;
