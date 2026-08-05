@@ -35,8 +35,8 @@ in {
 			{ match.class = "^[Vv]icinae$"; stay_focused = true; rounding = 10; }
 		];
 
-		bind = map call (builtins.concatLists [[
-			(bind_exec "SUPER + SUPER_L" "xdg-open vicinae://toggle")
-		]]);
+		bind = map call [
+			(bind_flags "SUPER + SUPER_L" ''hl.dsp.exec_cmd("xdg-open vicinae://toggle")'' { release = true; })
+		];
     };
 }

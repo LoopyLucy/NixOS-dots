@@ -28,6 +28,7 @@
 
     # 3. Handle the cursor layout gracefully across Wayland, X11, and GTK backends
     home.pointerCursor = {
+        enable = true;
         gtk.enable = true;
         x11.enable = true;
         package = pkgs.bibata-cursors;

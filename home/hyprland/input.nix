@@ -79,9 +79,9 @@ in {
                     (bind_exec "XF86AudioPause" "playerctl play-pause")
                     (bind_exec "XF86AudioPlay"  "playerctl play-pause")
                     (bind_exec "XF86AudioPrev"  "playerctl previous")
-                    (bind_exec "Menu + right"  "playerctl next")
-                    (bind_exec "Menu + left"  "playerctl previous")
-                    (bind_exec "Menu + down" "playerctl play-pause")
+                    (bind_exec "CTRL + ALT + right"  "playerctl next")
+                    (bind_exec "CTRL + ALT + left"  "playerctl previous")
+                    (bind_exec "CTRL + ALT + down" "playerctl play-pause")
                 ])
 
                 (with_flags { repeating = true; locked = true; } [

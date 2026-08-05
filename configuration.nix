@@ -15,12 +15,14 @@
     hardware = {
         graphics = {
             enable = true;
+            enable32Bit = true;
             extraPackages = with pkgs; [
                 rocmPackages.clr.icd
             ];
         };
         bluetooth.enable = true;
         steam-hardware.enable = true;
+        ckb-next.enable = true;
     };
 
     boot = {
@@ -30,9 +32,15 @@
         };
         
         kernelPackages = pkgs.linuxPackages_latest;
+        kernelParams = [ 
+            # Disable strict recovery or set a massive millisecond threshold for compute/gfx queues
+            "amdgpu.lockup_timeout=10000,10000,10000,10000"
+            "acpi_enforce_resources=lax"
+            "usbcore.quirks=0x0db0:0x7e80:g"
+        ];
 
         extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
-        kernelModules = [ "v4l2loopback" "uinput" ];
+        kernelModules = [ "v4l2loopback" "uinput" "i2c-dev" "i2c-piix4"];
         extraModprobeConfig = ''
             options v4l2loopback video_nr=2,3 width=640,2560 max_width=2560 height=480,1440 max_height=1440 format=YU12,YU12 exclusive_caps=1,1 card_label=Phone,Laptop debug=1
         '';
@@ -41,7 +49,7 @@
     users.users.erin = {
         isNormalUser = true;
         description = "Erin Lucy Fitton";
-        extraGroups = [ "networkmanager" "wheel" ];
+        extraGroups = [ "networkmanager" "wheel" "i2c" ];
         shell = pkgs.zsh;
 
         packages = with pkgs; [
@@ -64,7 +72,7 @@
             enable = true;
             allowPing = true;
             checkReversePath = "loose";
-            allowedTCPPorts = [ 53 ];
+            allowedTCPPorts = [ 53 30000];
             allowedUDPPorts = [ 53 67 68 ];
             # extraCommands = ''iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns'';
             # Open ports in the firewall.
@@ -102,10 +110,42 @@
             default = [ "gtk" ];
             };
             hyprland = {
-            default = [ "hyprland" "gtk" ];
+                default = [ "hyprland" "gtk" ];
             };
         };
     };
+
+    #systemd.tmpfiles.rules = [
+    #    "d /var/lib/foundryvtt 0755 1000 1000 - -"
+    #];
+#
+    #virtualisation.podman = {
+    #    enable = true;
+    #    defaultNetwork.settings.dns_enabled = false;
+    #};
+#
+    #virtualisation.containers.containersConf.settings = {
+    #    network = {
+    #        dns_bind_port = 1153;
+    #    };
+    #};
+#
+    #virtualisation.oci-containers = {
+    #    backend = "podman";
+    #    containers.foundryvtt = {
+    #    image = "ghcr.io/felddy/foundryvtt:14";
+    #    ports = [ "30000:30000" ];
+    #    extraOptions = [ "--network=host" ];
+    #    volumes = [
+    #        "/var/lib/foundryvtt:/data"
+    #    ];
+    #    environment = {
+    #        FOUNDRY_USERNAME = "Taggerung559";
+    #        FOUNDRY_PASSWORD = "ShareWithBrandon";
+    #        FOUNDRY_ADMIN_KEY = "INeedToPee03";
+    #    };
+    #    };
+    #};
 
     services = {
         desktopManager.plasma6.enable = false;
@@ -209,9 +249,9 @@
         printing = {
             enable = true;
             drivers = with pkgs; [
-            cups-filters
-            cups-browsed
-            gutenprint
+                cups-filters
+                cups-browsed
+                gutenprint
             ];
 
             listenAddresses = [ "*:631" ];
@@ -231,6 +271,11 @@
         gvfs = {
             enable = true;
             package = lib.mkForce pkgs.gnome.gvfs;
+        };
+
+        hardware.openrgb = {
+            enable = true;
+            motherboard = "amd";
         };
 
         udev.packages = with pkgs; [ game-devices-udev-rules ];
@@ -281,9 +326,15 @@
             v4l-utils
             blueman
             android-tools
+            file-roller
+            p7zip
+            unzip
+            zip
+            scrcpy
             libnotify
             glib
             usbutils
+            openjdk17
             temurin-bin-21
             temurin-bin-17
             temurin-bin-11
@@ -293,6 +344,9 @@
             nftables
             dnsmasq
             tree
+            mangohud
+            openrgb-with-all-plugins
+            uv
         ];
 
         shells = with pkgs; [ 
@@ -302,11 +356,13 @@
     };
 
     fonts = {
+        fontDir.enable = true;
         packages = with pkgs; [
             noto-fonts
             noto-fonts-cjk-sans
             noto-fonts-cjk-serif
             noto-fonts-color-emoji
+            corefonts
         ];
 
         fontconfig.defaultFonts = {
@@ -331,16 +387,20 @@
     #];
 
     programs = {
-
+        #hyprland.enable = true;
         xfconf.enable = true;
+	dconf.enable = true;
 
         nix-ld.enable = true;
         nix-ld.libraries = with pkgs; [
+            zlib
+            stdenv.cc.cc.lib
             temurin-bin-21
             temurin-bin-17
             wayland
             libGL
             glfw
+            glib
             openal
             flite
             libpulseaudio
@@ -360,6 +420,7 @@
             # Wayland support
             glfw3-minecraft 
             libdecor
+            vulkan-loader
         ];
 
         alvr = { 
@@ -389,9 +450,12 @@
             capSysNice = false;
         };
 
+        gamemode.enable = true;
+
         steam = {
             enable = true;
             gamescopeSession.enable = true;
+            extest.enable = true;
             platformOptimizations.enable = true;
             remotePlay.openFirewall = true;
             dedicatedServer.openFirewall = true;

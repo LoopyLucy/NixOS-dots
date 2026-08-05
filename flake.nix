@@ -18,7 +18,7 @@
         };
         split-monitor-workspaces = {
             url = "github:Duckonaut/split-monitor-workspaces";
-            inputs.hyprland.follows = "hyprland"; # <- make sure this line is present for the plugin to work as intended
+            inputs.hyprland.follows = "hyprland";
         };
         
         zen-browser = {
@@ -31,7 +31,7 @@
         nix-citizen.url = "github:LovingMelody/nix-citizen";
     };
 
-    outputs = inputs@{ self, nixpkgs, home-manager, nvf, split-monitor-workspaces, zen-browser, nix-gaming, nix-citizen,... }:
+    outputs = inputs@{ self, nixpkgs, home-manager, nvf, split-monitor-workspaces, zen-browser, nix-gaming, nix-citizen, ... }:
     let
         inherit (self) outputs;
         lib = nixpkgs.lib;
@@ -45,7 +45,7 @@
                 specialArgs = { inherit inputs outputs; };
                 modules = [ 
                     ./configuration.nix
-                    nvf.nixosModules.default 
+                    nvf.nixosModules.default
                 ];
             };
         };

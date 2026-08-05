@@ -16,6 +16,7 @@ in {
     ];
 
     xdg.configFile."hypr/scripts".source = ./scripts;
+    xdg.configFile."hypr/plugins/split-monitor-workspaces".source = inputs.split-monitor-workspaces;
 
     home.packages = with pkgs; [
         hyprpicker
@@ -35,9 +36,21 @@ in {
 
         systemd.variables = ["--all"];
 
-        plugins = [
-            inputs.split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system}.split-monitor-workspaces
-        ];
+        #plugins = [
+        #    inputs.split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system}.split-monitor-workspaces
+        #];
+
+        extraConfig = ''
+            package.path = package.path .. ";" .. os.getenv("HOME") .. "/.config/hypr/?.lua;" .. os.getenv("HOME") .. "/.config/hypr/?/init.lua"
+            
+            hl.plugin = hl.plugin or {}
+            hl.plugin.split_monitor_workspaces = require("plugins.split-monitor-workspaces")
+            
+            -- Initialize the plugin (required in the Lua version)
+            hl.plugin.split_monitor_workspaces.setup({
+                workspace_count = 10 -- adjust this to how many you want per monitor
+            })
+        '';
 
         configType = "lua";
         settings = {
@@ -92,19 +105,12 @@ in {
             ];
 
             window_rule = [
-                /* Tags */
-                { match.class = "^([Hh]ytale[Cc]lient|org-prismlauncher-EntryPoint|.*[Mm]inecraft.*)"; tag = "+games"; }
-                { match.class = "^(vlc|com.stremio.stremio)"; tag = "+media"; }
-
-                /* Overrides */
-                { match = { tag = "games*"; class = "^(.*zen.*)"; }; opaque = true; fullscreen_state = 2; }
-                { match = { tag = "media*"; }; opacity = "1.0 override"; fullscreen = true; }
-
-                /* Force Floating */
-                { match = { class = "^([Tt]hunar)"; title = "negative:(.*[Tt]hunar.*)"; }; float = true;}
-
-                /* Centering */
-                { match.title = "^(Picture-in-Picture)$"; float = true; }
+                { match = { class = "^([Hh]ytale[Cc]lient|org-prismlauncher-EntryPoint|.*[Mm]inecraft.*)$"; }; tag = "+games"; }
+                { match = { class = "^.*(vlc|com.stremio.stremio).*$"; }; tag = "+media"; }
+                { match = { tag = "games.*"; class = "^.*zen.*$"; }; opaque = true; fullscreen_state = "2"; }
+                { match = { tag = "media.*"; }; opacity = "1.0 override"; fullscreen = true; }
+                { match = { class = "^([Tt]hunar)$"; title = "negative:(.*[Tt]hunar.*)"; }; float = true; }
+                { match = { title = "^(Picture-in-Picture)$"; }; float = true; }
             ];
         };
     };

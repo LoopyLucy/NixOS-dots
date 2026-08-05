@@ -18,6 +18,10 @@
         shell.enableZshIntegration = true;
 
         sessionVariables = {
+            GDK_BACKEND = "wayland,x11,*";
+            CLUTTER_BACKEND = "wayland";
+            QT_QPA_PLATFORM = "wayland;xcb";
+
             NIXOS_OZONE_WL = 1;
             NIXPKGS_ALLOW_UNFREE = 1;
             SHELL = "zsh";
@@ -28,13 +32,17 @@
 
     nixpkgs.config = {
         allowUnfree = true;
+        permittedInsecurePackages = [
+            "electron-39.8.10"
+            "electron-40.10.5"
+        ];
     };
 
     fonts.fontconfig.enable = true;
     home.packages = with pkgs; [
         #Software
         inputs.zen-browser.packages."${stdenv.hostPlatform.system}".default
-        #brave
+        brave
         bitwarden-desktop
         logiops
         #(bottles.override {removeWarningPopup = true;})
@@ -46,6 +54,7 @@
         jetbrains.idea-oss #Intellij IDEA OSS
         vlc
         blockbench
+        blender
         android-studio
         obsidian
         krita
@@ -54,6 +63,8 @@
         audacity
         qalculate-qt
         pixelorama
+        godot
+        #openrgb
 
         #Games
         #inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.star-citizen
@@ -98,6 +109,9 @@
     xdg.mimeApps = {
         enable = true;
         defaultApplications = {
+            "text/html" = "zen-beta.desktop";
+            "x-scheme-handler/http" = "zen-beta.desktop";
+            "x-scheme-handler/https" = "zen-beta.desktop";
             "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "writer.desktop";
             "inode/directory" = ["thunar.desktop"];
             "x-scheme-handler/file" = [ "thunar.desktop" ];
@@ -119,6 +133,19 @@
             terminal = false;
             categories = [ "Network" "InstantMessaging" "Chat" ];
             comment = "Vesktop with native Wayland and VA-API flags enabled via Home Manager";
+        };
+    };
+
+    xdg.portal = {
+        enable = true;
+        extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+        config = {
+            common = {
+            default = [ "hyprland" "gtk" ];
+            };
+            hyprland = {
+            default = [ "hyprland" "gtk" ];
+            };
         };
     };
 
@@ -215,10 +242,6 @@
             init.defaultBranch = "mistress";
         };
     };
-
-    nixpkgs.config.permittedInsecurePackages = [
-        "electron-39.8.10"
-    ]; #TEMP
 
     programs.home-manager.enable = true; #required
 }
