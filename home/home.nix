@@ -51,6 +51,7 @@
         obs-studio
         discord
         vencord
+        element-desktop
         jetbrains.idea-oss #Intellij IDEA OSS
         vlc
         blockbench
@@ -92,6 +93,7 @@
         winetricks
         protontricks
         imv
+        wtype
 
         #limo
         #steamtinkerlaunch

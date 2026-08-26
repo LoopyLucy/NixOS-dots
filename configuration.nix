@@ -347,6 +347,10 @@
             mangohud
             openrgb-with-all-plugins
             uv
+            easyeffects
+            rcon-cli
+            sqlite
+            steamcmd
         ];
 
         shells = with pkgs; [ 
@@ -389,7 +393,7 @@
     programs = {
         #hyprland.enable = true;
         xfconf.enable = true;
-	dconf.enable = true;
+	    dconf.enable = true;
 
         nix-ld.enable = true;
         nix-ld.libraries = with pkgs; [
@@ -550,6 +554,7 @@
                 };
             };
         };
+        noisetorch.enable = true;
     };
 
     nixpkgs.config = {
