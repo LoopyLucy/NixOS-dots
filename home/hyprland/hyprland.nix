@@ -110,6 +110,7 @@ in {
                 { match = { tag = "games.*"; class = "^.*zen.*$"; }; opaque = true; fullscreen_state = "2"; }
                 { match = { tag = "media.*"; }; opacity = "1.0 override"; fullscreen = true; }
                 { match = { class = "^([Tt]hunar)$"; title = "negative:(.*[Tt]hunar.*)"; }; float = true; }
+                { match = { class = "^([Tt]hunar)$"; title = "(.*[Tt]hunar.*)"; }; tile = true; fullscreen_state = "0"; float = false; }
                 { match = { title = "^(Picture-in-Picture)$"; }; float = true; }
             ];
         };
